@@ -1,0 +1,22 @@
+{
+  "name": "teknons-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Teknons shared business platform core, Teknons Compta (SYSCOHADA accounting), Teknons POS (shops and supermarkets), Teknons Hôtel (hotels), Teknons Resto (restaurants) and Teknons École (schools and universities).",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --no-warnings server.mjs",
+    "dev": "node --no-warnings --watch server.mjs",
+    "seed": "node --no-warnings scripts/seed-demo.mjs",
+    "seed:shop": "MODULES=shop node --no-warnings scripts/seed-shop.mjs",
+    "start:shop": "MODULES=shop node --no-warnings server.mjs",
+    "seed:hotel": "MODULES=hotel node --no-warnings scripts/seed-hotel.mjs",
+    "start:hotel": "MODULES=hotel node --no-warnings server.mjs",
+    "seed:resto": "MODULES=restaurant node --no-warnings scripts/seed-resto.mjs",
+    "start:resto": "MODULES=restaurant node --no-warnings server.mjs",
+    "seed:school": "MODULES=school node --no-warnings scripts/seed-school.mjs",
+    "start:school": "MODULES=school node --no-warnings server.mjs",
+    "test": "node --no-warnings --test test/*.test.mjs"
+  }
+}

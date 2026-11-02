@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F3B2C">
+<title>Teknons École</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{--g:#0F3B2C;--g2:#145A41;--a:#15803D;--a-l:#E7F5EC;--gold:#C9A227;--gold-l:#FBF4DE;--bg:#F4F6F2;--ink:#13261E;--muted:#5D6B64;--line:#E2E8E3;--ok:#15803D;--ok-bg:#E7F5EC;--bad:#C93636;--bad-bg:#FDECEC;--warn:#A66300;--warn-bg:#FFF4DE;--r:18px}
+*{box-sizing:border-box}html,body{margin:0}
+body{font:15px/1.5 "Hanken Grotesk",system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;padding-bottom:40px}
+button,input,select,textarea{font:inherit;color:inherit}a{color:var(--a)}
+.mono{font-family:"IBM Plex Mono",monospace}
+.hero{background:radial-gradient(120% 160% at 100% 0,#1F7A52 0,var(--g) 55%,#0A2A1F 100%);color:#fff;padding:18px 20px 66px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-70px;top:-70px;width:240px;height:240px;border-radius:50%;border:1px solid rgba(255,255,255,.08);box-shadow:0 0 0 34px rgba(255,255,255,.03),0 0 0 70px rgba(255,255,255,.02)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative;z-index:1;max-width:980px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.02em}
+.brand i{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--gold),#E8CF7A);display:grid;place-items:center;font-style:normal;color:var(--g);font-size:18px}
+.brand small{display:block;font-weight:500;color:#B9D7C7;font-size:12px;letter-spacing:0}
+.lang{background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:99px;padding:6px 12px;font-weight:700;cursor:pointer}
+.hero .in{max-width:980px;margin:0 auto;position:relative;z-index:1}
+.hero h1{font:600 32px/1.08 Fraunces,serif;margin:18px 0 6px}
+.hero .sub{color:#C6E0D2;font-size:14px}
+.who{display:flex;gap:16px;align-items:center;margin-top:18px}
+.who img,.who .av{width:68px;height:68px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.4);flex:none}
+.av{display:grid;place-items:center;background:rgba(255,255,255,.14);font:700 24px Fraunces,serif}
+.sib{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.sib a{background:rgba(255,255,255,.12);color:#fff;border-radius:99px;padding:5px 12px;font-size:13px;font-weight:700;text-decoration:none}
+.wrap{max-width:980px;margin:-44px auto 0;padding:0 14px;position:relative}
+.card{background:#fff;border-radius:var(--r);padding:18px;box-shadow:0 8px 28px rgba(15,59,44,.08);margin-bottom:14px}
+.card h2{font:600 21px/1.2 Fraunces,serif;margin:0 0 10px;color:var(--g)}.card h3{margin:0 0 8px;font-size:16px}
+.row{display:flex;align-items:center;gap:10px}.between{justify-content:space-between}.wrapf{flex-wrap:wrap}
+.muted{color:var(--muted)}.sm{font-size:13px}.r{text-align:right}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:11px 16px;font-weight:700;cursor:pointer;text-decoration:none;color:var(--ink)}
+.btn.primary{background:var(--a);border-color:var(--a);color:#fff}.btn.dark{background:var(--g);border-color:var(--g);color:#fff}.btn.gold{background:var(--gold);border-color:var(--gold);color:#2B2100}
+.btn.block{width:100%}.btn:disabled{opacity:.5}.btn.sm{padding:6px 12px;font-size:13px;border-radius:10px}
+.tabs{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:4px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:8px 14px;font-weight:700;white-space:nowrap;text-decoration:none;color:var(--ink);font-size:14px}
+.tabs a.on{background:var(--g);border-color:var(--g);color:#fff}.tabs a b{background:var(--bad);color:#fff;border-radius:99px;padding:0 6px;font-size:11px;margin-left:4px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(15,59,44,.06)}
+.kpi .l{font-size:12.5px;color:var(--muted);font-weight:600}.kpi .v{font:700 24px/1.15 Fraunces,serif;color:var(--g);margin-top:2px}.kpi .s{font-size:12.5px;color:var(--muted)}
+.kpi.dark{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff}.kpi.dark .v{color:#fff}.kpi.dark .l,.kpi.dark .s{color:#BFDACB}
+.pill{display:inline-flex;align-items:center;gap:4px;border-radius:99px;padding:2px 9px;font-size:12px;font-weight:700;background:#F1F4F2;color:var(--muted);white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}.pill.bad{background:var(--bad-bg);color:var(--bad)}.pill.warn{background:var(--warn-bg);color:var(--warn)}.pill.gold{background:var(--gold-l);color:#7A5C00}
+.lrow{padding:10px 0;border-bottom:1px solid var(--line)}.lrow:last-child{border-bottom:0}
+table{width:100%;border-collapse:collapse;font-size:14px}th{font-size:12px;color:var(--muted);text-align:left;font-weight:700;padding:8px 6px;border-bottom:1px solid var(--line)}td{padding:9px 6px;border-bottom:1px solid var(--line)}
+.tw{overflow-x:auto}.good{color:var(--ok);font-weight:700}.badt{color:var(--bad);font-weight:700}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--gold))}
+.fld{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:10px}
+.fld input,.fld select,.fld textarea{border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;color:var(--ink);font-weight:500;font-size:15px}
+.fld textarea{min-height:110px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.banner{padding:12px 14px;border-radius:14px;background:var(--a-l);margin-bottom:12px;font-size:14px}.banner.warn{background:var(--warn-bg)}.banner.bad{background:var(--bad-bg)}
+.ann{border-left:4px solid var(--a);padding:2px 0 2px 12px;margin-bottom:14px}.ann.pin{border-color:var(--gold)}
+.hw{background:var(--warn-bg);border-radius:12px;padding:8px 10px;margin-top:6px;font-size:14px}
+.day h4{margin:14px 0 6px;font-size:14px;color:var(--g)}.slot{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:8px 10px;border-radius:12px;background:#F7F9F7;margin-bottom:6px;border-left:4px solid var(--c,var(--a))}
+.courses{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.course{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(15,59,44,.07);cursor:pointer;text-decoration:none;color:var(--ink);display:flex;flex-direction:column}
+.cover{background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 55%,#000));color:#fff;padding:16px;min-height:110px;display:flex;flex-direction:column;justify-content:flex-end}
+.cover b{font:600 19px/1.15 Fraunces,serif}.cover span{font-size:12.5px;opacity:.85}
+.course .bd{padding:12px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.les{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;border:1.5px solid var(--line);margin-bottom:8px;cursor:pointer;background:#fff}
+.les.on{border-color:var(--a);background:var(--a-l)}.les.lock{opacity:.55}
+.les .k{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--a-l);color:var(--a);font-weight:800;flex:none}
+.les .k.done{background:var(--a);color:#fff}
+.player{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start}
+.video{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;background:#000}.video iframe,.video video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.q{border:1.5px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}.q label{display:flex;gap:8px;align-items:center;padding:8px;border-radius:10px;cursor:pointer}
+.q label:hover{background:#F4F6F2}.q label.right{background:var(--ok-bg)}.q label.wrong{background:var(--bad-bg)}
+.content{white-space:pre-wrap;line-height:1.65}
+.verify{max-width:520px;margin:-44px auto 0;padding:0 14px;position:relative}
+.seal{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-size:40px;margin:0 auto 10px;background:var(--ok-bg);color:var(--ok);border:3px solid var(--ok)}
+.seal.no{background:var(--bad-bg);color:var(--bad);border-color:var(--bad)}
+.pub{border-bottom:1px solid var(--line);padding:14px 0}.pub:last-child{border:0}.pub h3{font:600 18px/1.3 Fraunces,serif;margin:6px 0 4px;color:var(--g)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--g);color:#fff;padding:12px 18px;border-radius:14px;font-weight:700;z-index:50;box-shadow:0 10px 30px rgba(0,0,0,.2);max-width:90vw}
+.toast.err{background:var(--bad)}
+.foot{text-align:center;color:var(--muted);font-size:12.5px;margin:24px 0}
+.spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--a);border-radius:50%;animation:sp 1s linear infinite;margin:40px auto}@keyframes sp{to{transform:rotate(360deg)}}
+.steps{display:flex;gap:6px;margin:10px 0}.steps i{flex:1;height:6px;border-radius:99px;background:var(--line)}.steps i.on{background:var(--a)}
+@media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.player{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.hero h1{font-size:26px}}
+@media print{.tabs,.lang,.btn{display:none!important}}
+</style>
+</head>
+<body>
+<div id="app"><div class="spin"></div></div>
+<script>
+(() => {
+  let lang = 'fr'; try { lang = localStorage.getItem('tk:lang') || 'fr'; } catch {}
+  const L = (fr, en) => (lang === 'en' ? en ?? fr : fr);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const num = (n) => Math.round(Number(n) || 0).toLocaleString('fr-FR').replace(/ | /g, ' ');
+  const money = (n) => `${num(n)} FCFA`;
+  const dec = (n) => (n == null ? '—' : String(Math.round(n * 100) / 100).replace('.', lang === 'en' ? '.' : ','));
+  const dt = (d) => (d ? d.slice(0, 10).split('-').reverse().join('/') : '');
+  const longDate = (d) => new Date(d.slice(0, 10) + 'T12:00:00').toLocaleDateString(lang === 'en' ? 'en-GB' : 'fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+  const time = (iso) => new Date(iso).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Douala' });
+  const app = document.getElementById('app');
+  const toast = (m, err) => { const t = document.createElement('div'); t.className = 'toast' + (err ? ' err' : ''); t.textContent = m; document.body.append(t); setTimeout(() => t.remove(), 3800); };
+  async function api(method, url, body) {
+    const r = await fetch(url, { method, headers: body ? { 'Content-Type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined });
+    const d = await r.json().catch(() => null);
+    if (!r.ok) throw new Error(d?.message || `Erreur ${r.status}`);
+    return d;
+  }
+  const get = (u) => api('GET', u); const post = (u, b) => api('POST', u, b || {});
+  const langBtn = `<button class="lang" id="lang">${lang === 'en' ? 'FR' : 'EN'}</button>`;
+  const wireLang = () => document.getElementById('lang')?.addEventListener('click', () => { lang = lang === 'en' ? 'fr' : 'en'; try { localStorage.setItem('tk:lang', lang); } catch {} route(); });
+  const hero = (school, inner, sub = '') => `<header class="hero"><div class="top"><div class="brand"><i>✦</i><span>${esc(school?.name || 'Teknons École')}<small>${esc(sub || school?.city || '')}</small></span></div>${langBtn}</div><div class="in">${inner}</div></header>`;
+  const foot = `<p class="foot">${L('Propulsé par', 'Powered by')} <b>Teknons École</b> · ${L('données protégées', 'protected data')}</p>`;
+  const embed = (url) => {
+    if (!url) return '';
+    let m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{6,})/);
+    if (m) return `<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/${m[1]}" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`;
+    m = url.match(/vimeo\.com\/(\d+)/);
+    if (m) return `<div class="video"><iframe src="https://player.vimeo.com/video/${m[1]}" allow="fullscreen" allowfullscreen></iframe></div>`;
+    if (/\.(mp4|webm)(\?|$)/i.test(url)) return `<div class="video"><video src="${esc(url)}" controls playsinline></video></div>`;
+    return `<a class="btn primary" target="_blank" rel="noopener" href="${esc(url)}">${L('Ouvrir la ressource', 'Open the resource')}</a>`;
+  };
+  const KI = { video: '▶', text: '📄', pdf: '📑', quiz: '✔', assignment: '✍', live: '●' };
+  const KN = { video: ['Vidéo', 'Video'], text: ['Lecture', 'Reading'], pdf: ['PDF', 'PDF'], quiz: ['Quiz', 'Quiz'], assignment: ['Devoir', 'Assignment'], live: ['En direct', 'Live'] };
+
+  // ================= Portal =================
+  let P = null, token = '';
+  async function portal(tok) {
+    token = tok;
+    try { P = await get(`/api/public/school/p/${tok}`); } catch (e) { app.innerHTML = hero(null, `<h1>${L('Lien invalide', 'Invalid link')}</h1><p class="sub">${esc(e.message)}</p>`) + '<div class="wrap"></div>'; wireLang(); return; }
+    renderPortal();
+  }
+  function renderPortal() {
+    const s = P.student, sc = P.school, lmd = sc.grading === 'lmd';
+    document.title = `${s.first_name} · ${sc.name}`;
+    const tab = (location.hash.slice(1) || 'home').split('-')[0];
+    const unpaid = P.fees.overdue > 0;
+    const tabs = [['home', L('Accueil', 'Home')], ['marks', L('Notes', 'Marks')], ['reports', lmd ? L('Relevés', 'Transcripts') : L('Bulletins', 'Report cards')], ['attendance', L('Assiduité', 'Attendance')], ['homework', L('Devoirs', 'Homework')], ['timetable', L('Emploi du temps', 'Timetable')],
+      ['fees', L('Frais', 'Fees') + (unpaid ? ' <b>!</b>' : '')], ['courses', L('Cours en ligne', 'Courses')], ['library', L('Bibliothèque', 'Library')], ['news', L('Annonces', 'News')]];
+    const ini = (s.last_name[0] || '') + (s.first_name[0] || '');
+    app.innerHTML = hero(sc, `<div class="who">${s.photo ? `<img src="${esc(s.photo)}" alt="">` : `<span class="av">${esc(ini)}</span>`}<div><h1 style="margin:0">${esc(s.first_name)} ${esc(s.last_name)}</h1>
+      <div class="sub">${esc(s.class_name || L('Non inscrit(e)', 'Not enrolled'))} · <span class="mono">${esc(s.matricule)}</span> · ${esc(sc.year || '')}${s.head_teacher ? ` · ${L('Prof. principal', 'Form teacher')} ${esc(s.head_teacher)}` : ''}</div></div></div>
+      ${P.siblings.length ? `<div class="sib">${L('Frères et sœurs', 'Siblings')} : ${P.siblings.map((x) => `<a href="/p/${esc(x.token)}">${esc(x.first_name)}</a>`).join('')}</div>` : ''}`, L('Espace parents et élèves', 'Parents & students')) +
+      `<main class="wrap"><nav class="tabs">${tabs.map(([k, l]) => `<a href="#${k}" class="${tab === k ? 'on' : ''}">${l}</a>`).join('')}</nav><div id="body"></div>${foot}</main>`;
+    wireLang();
+    const body = document.getElementById('body');
+    const fn = { home, marks, reports, attendance, homework, timetable, fees, courses, library, news }[tab] || home;
+    fn(body);
+  }
+  window.addEventListener('hashchange', () => { if (P) renderPortal(); });
+
+  function home(el) {
+    const m = P.marks, seqs = m.summary.filter((p) => !/^t\d/.test(p.id)), last = seqs[seqs.length - 1] || m.summary[m.summary.length - 1], t = P.attendance.totals;
+    const next = P.homework.filter((h) => h.homework && h.due_date >= P.today).sort((a, b) => a.due_date.localeCompare(b.due_date));
+    const todayGate = P.attendance.gate.filter((g) => g.at.slice(0, 10) === P.today);
+    el.innerHTML = `<div class="kpis"><div class="kpi dark"><div class="l">${last ? esc(L(last.fr, last.en)) : L('Moyenne', 'Average')}</div><div class="v">${last ? dec(last.average) : '—'}<small style="font-size:14px">/20</small></div><div class="s">${last ? `${L('Rang', 'Rank')} ${last.rank}/${last.size} · ${L('classe', 'class')} ${dec(last.class_avg)}` : L('Pas encore de moyenne', 'No average yet')}</div></div>
+      <div class="kpi"><div class="l">${L('Absences', 'Absences')}</div><div class="v">${t.hours} h</div><div class="s">${t.unjustified} h ${L('non justifiées', 'unexcused')} · ${t.lates} ${L('retards', 'lates')}</div></div>
+      <div class="kpi"><div class="l">${L('Reste à payer', 'Balance')}</div><div class="v" style="${P.fees.overdue ? 'color:var(--bad)' : ''}">${num(P.fees.balance)}</div><div class="s">FCFA${P.fees.overdue ? ` · ${num(P.fees.overdue)} ${L('en retard', 'overdue')}` : ''}</div></div>
+      <div class="kpi"><div class="l">${L('Devoirs à venir', 'Upcoming homework')}</div><div class="v">${next.length}</div><div class="s">${next[0] ? `${esc(next[0].subject)} · ${dt(next[0].due_date)}` : L('Rien à rendre', 'Nothing due')}</div></div></div>
+      ${s_allergy()}
+      <div class="g2"><div class="card"><h2>${L('Aujourd\'hui', 'Today')}</h2>${todayGate.length ? todayGate.map((g) => `<div class="lrow row between"><span>${g.direction === 'in' ? L('Arrivé(e) à l\'école', 'Arrived at school') : L('Sorti(e)', 'Left')} </span><span class="pill ${g.late_minutes ? 'warn' : 'ok'}">${time(g.at)}${g.late_minutes ? ` · +${g.late_minutes} min` : ''}</span></div>`).join('') : `<p class="muted">${L('Pas encore de passage au portail aujourd\'hui.', 'No gate scan yet today.')}</p>`}
+        ${P.fees.overdue && P.school.pay ? `<a class="btn gold block" href="#fees" style="margin-top:10px">${L('Payer les frais par Mobile Money', 'Pay fees by Mobile Money')}</a>` : ''}</div>
+        <div class="card"><h2>${L('Annonces', 'News')}</h2>${P.announcements.slice(0, 3).map((a) => `<div class="ann ${a.pinned ? 'pin' : ''}"><b>${esc(a.title)}</b><div class="muted sm">${dt(a.date)}</div><div class="sm" style="white-space:pre-wrap">${esc(a.body.slice(0, 200))}${a.body.length > 200 ? '…' : ''}</div></div>`).join('') || `<p class="muted">—</p>`}</div></div>
+      ${seqs.length > 1 ? `<div class="card"><h2>${L('Évolution', 'Progress')}</h2>${trend(seqs)}</div>` : ''}`;
+  }
+  const s_allergy = () => (P.student.allergies ? `<div class="banner bad">${L('Allergie signalée', 'Reported allergy')} : <b>${esc(P.student.allergies)}</b></div>` : '');
+  function trend(list) {
+    const w = 600, h = 160, pad = 24, n = list.length;
+    const x = (i) => pad + (i * (w - 2 * pad)) / Math.max(1, n - 1), y = (v) => h - pad - (v / 20) * (h - 2 * pad);
+    const pts = list.map((p, i) => `${x(i)},${y(p.average)}`).join(' ');
+    const cls = list.map((p, i) => `${x(i)},${y(p.class_avg ?? 0)}`).join(' ');
+    return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto"><line x1="${pad}" x2="${w - pad}" y1="${y(10)}" y2="${y(10)}" stroke="#E2E8E3" stroke-dasharray="4 4"/><polyline points="${cls}" fill="none" stroke="#C9A227" stroke-width="2" stroke-dasharray="5 4"/><polyline points="${pts}" fill="none" stroke="#15803D" stroke-width="3"/>
+      ${list.map((p, i) => `<circle cx="${x(i)}" cy="${y(p.average)}" r="5" fill="#15803D"/><text x="${x(i)}" y="${y(p.average) - 10}" text-anchor="middle" font-size="12" font-weight="700" fill="#0F3B2C">${dec(p.average)}</text><text x="${x(i)}" y="${h - 4}" text-anchor="middle" font-size="11" fill="#5D6B64">${esc(L(p.fr, p.en).replace('Séquence', 'Séq.').replace('Sequence', 'Seq.'))}</text>`).join('')}</svg>
+      <div class="sm muted"><span style="color:#15803D">━</span> ${esc(P.student.first_name)} &nbsp; <span style="color:#C9A227">┅</span> ${L('moyenne de la classe', 'class average')}</div>`;
+  }
+  function marks(el) {
+    const m = P.marks;
+    el.innerHTML = `${m.summary.length ? `<div class="kpis">${m.summary.slice(-4).map((p) => `<div class="kpi"><div class="l">${esc(L(p.fr, p.en))}</div><div class="v ${p.average < 10 ? 'badt' : ''}">${dec(p.average)}</div><div class="s">${L('Rang', 'Rank')} ${p.rank}/${p.size}${p.gpa != null ? ` · GPA ${p.gpa}` : ''}</div></div>`).join('')}</div>` : ''}
+      <div class="card"><h2>${L('Notes par matière', 'Marks by subject')}</h2><div class="tw"><table><thead><tr><th>${L('Matière', 'Subject')}</th><th>Coef</th>${m.slots.map((q) => `<th class="r">${esc(q.label.replace('Séquence ', 'S').replace('Trimestre ', 'T'))}</th>`).join('')}</tr></thead><tbody>
+      ${m.courses.map((c) => `<tr><td><b>${esc(c.subject)}</b><div class="muted sm">${esc(c.teacher || '')}</div></td><td>${c.coef}</td>${m.slots.map((q) => { const v = c.marks[q.seq]; return `<td class="r">${v === 'abs' ? '<span class="pill bad">abs</span>' : v == null ? '<span class="muted">·</span>' : `<span class="${v < 10 ? 'badt' : v >= 14 ? 'good' : ''}">${dec(v)}</span>`}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div></div>
+      <div class="card"><h2>${L('Dernières évaluations', 'Latest assessments')}</h2>${m.tests.map((t) => `<div class="lrow row between"><span><b>${esc(t.title)}</b><div class="muted sm">${esc(m.courses.find((c) => c.id === t.course_id)?.subject || '')} · ${dt(t.date)}</div></span><span>${t.absent ? '<span class="pill bad">abs</span>' : t.score == null ? '—' : `<b>${dec(t.score)}</b>/${t.max}`}</span></div>`).join('') || `<p class="muted">—</p>`}</div>
+      ${P.exams.length ? `<div class="card"><h2>${L('Examens officiels', 'Official exams')}</h2>${P.exams.map((x) => `<div class="lrow row between"><span><b>${esc(x.exam)}</b> ${esc(x.session)} ${esc(x.series || '')}</span><span class="pill ${x.result === 'passed' ? 'ok' : x.result === 'failed' ? 'bad' : ''}">${esc({ passed: L('Admis', 'Passed'), failed: L('Échec', 'Failed'), registered: L('Inscrit', 'Registered'), absent: 'Absent' }[x.result])}${x.mention ? ` · ${esc(x.mention)}` : ''}</span></div>`).join('')}</div>` : ''}`;
+  }
+  function reports(el) {
+    el.innerHTML = `<div class="card"><h2>${P.school.grading === 'lmd' ? L('Relevés de notes', 'Transcripts') : L('Bulletins', 'Report cards')}</h2><p class="muted">${L('Chaque bulletin porte un QR code : n\'importe qui peut vérifier son authenticité.', 'Each report card carries a QR code anyone can scan to check it is genuine.')}</p>
+      ${P.reportable.map((p) => `<div class="lrow row between"><b>${esc(L(p.fr, p.en))}</b><a class="btn sm primary" target="_blank" href="/p/${token}/bulletin?period=${p.id}&lang=${lang}">${L('Ouvrir / imprimer', 'Open / print')}</a></div>`).join('') || `<p class="muted">${L('Le premier bulletin sera disponible après le conseil de classe.', 'The first report card will be available after the class council.')}</p>`}</div>`;
+  }
+  function attendance(el) {
+    const t = P.attendance.totals;
+    el.innerHTML = `<div class="kpis"><div class="kpi dark"><div class="l">${L('Heures d\'absence', 'Hours absent')}</div><div class="v">${t.hours}</div><div class="s">${t.justified} h ${L('justifiées', 'excused')}</div></div><div class="kpi"><div class="l">${L('Non justifiées', 'Unexcused')}</div><div class="v ${t.unjustified ? 'badt' : ''}">${t.unjustified} h</div></div><div class="kpi"><div class="l">${L('Retards', 'Lates')}</div><div class="v">${t.lates}</div></div><div class="kpi"><div class="l">${L('Sanctions', 'Sanctions')}</div><div class="v">${P.discipline.filter((d) => d.kind !== 'praise').length}</div></div></div>
+      <div class="g2"><div class="card"><h2>${L('Absences et retards', 'Absences & lateness')}</h2>${P.attendance.list.map((a) => `<div class="lrow row between"><span>${dt(a.date)}<div class="muted sm">${esc(a.subject || L('Journée', 'Day'))}${a.reason ? ` · ${esc(a.reason)}` : ''}</div></span><span class="pill ${a.kind === 'late' ? 'warn' : a.justified ? 'ok' : 'bad'}">${a.kind === 'late' ? `${L('Retard', 'Late')} ${a.minutes} min` : `${a.hours} h${a.justified ? ` · ${L('justifiée', 'excused')}` : ''}`}</span></div>`).join('') || `<p class="muted">${L('Aucune absence 👏', 'No absence 👏')}</p>`}</div>
+      <div class="card"><h2>${L('Vie scolaire', 'Conduct')}</h2>${P.discipline.map((d) => `<div class="lrow"><div class="row between"><b>${esc(d.kind === 'praise' ? L('Félicitations', 'Praise') : { warning: L('Avertissement', 'Warning'), detention: L('Consigne', 'Detention'), blame: L('Blâme', 'Reprimand'), suspension: L('Exclusion temporaire', 'Suspension'), exclusion: L('Exclusion', 'Expulsion') }[d.kind])}</b><span class="muted sm">${dt(d.date)}</span></div><div class="sm">${esc(d.reason)}</div></div>`).join('') || `<p class="muted">${L('Rien à signaler', 'Nothing to report')}</p>`}
+      <h3 style="margin-top:16px">${L('Passages au portail', 'Gate log')}</h3>${P.attendance.gate.map((g) => `<div class="lrow row between sm"><span>${dt(g.at)}</span><span>${g.direction === 'in' ? L('entrée', 'in') : L('sortie', 'out')} ${time(g.at)}${g.late_minutes ? ` <span class="pill warn">+${g.late_minutes} min</span>` : ''}</span></div>`).join('') || '<p class="muted">—</p>'}</div></div>`;
+  }
+  function homework(el) {
+    const by = {}; for (const h of P.homework) (by[h.date] ||= []).push(h);
+    el.innerHTML = Object.entries(by).map(([d, hs]) => `<div class="card"><h3 style="text-transform:capitalize">${esc(longDate(d))}</h3>${hs.map((h) => `<div class="lrow"><div class="row between"><b>${esc(h.subject)}</b><span class="muted sm">${esc(h.teacher || '')}</span></div><div>${esc(h.title)}</div>${h.content ? `<div class="muted sm" style="white-space:pre-wrap">${esc(h.content)}</div>` : ''}${h.homework ? `<div class="hw">📝 ${esc(h.homework)}${h.due_date ? ` · <b>${L('pour le', 'due')} ${dt(h.due_date)}</b>` : ''}</div>` : ''}</div>`).join('')}</div>`).join('') || `<div class="card"><p class="muted">${L('Le cahier de textes est vide pour le moment.', 'The lesson log is empty for now.')}</p></div>`;
+  }
+  function timetable(el) {
+    const D = { 1: ['Lundi', 'Monday'], 2: ['Mardi', 'Tuesday'], 3: ['Mercredi', 'Wednesday'], 4: ['Jeudi', 'Thursday'], 5: ['Vendredi', 'Friday'], 6: ['Samedi', 'Saturday'] };
+    const today = new Date().getDay();
+    el.innerHTML = `<div class="card">${Object.keys(D).map(Number).filter((d) => P.timetable.some((t) => t.day === d)).map((d) => `<div class="day"><h4>${esc(L(...D[d]))}${d === today ? ` <span class="pill ok">${L('aujourd\'hui', 'today')}</span>` : ''}</h4>${P.timetable.filter((t) => t.day === d).map((t) => `<div class="slot" style="--c:${esc(t.color || '#15803D')}"><b>${esc(t.start)}–${esc(t.end)}</b><span><b>${esc(t.subject)}</b> <span class="muted sm">${esc(t.teacher || '')}${t.room ? ` · ${esc(t.room)}` : ''}</span></span></div>`).join('')}</div>`).join('') || `<p class="muted">${L('Emploi du temps pas encore publié.', 'Timetable not published yet.')}</p>`}</div>`;
+  }
+  function fees(el) {
+    const f = P.fees, sc = P.school;
+    const open = f.items.filter((i) => ['open', 'partial'].includes(i.status));
+    el.innerHTML = `<div class="kpis"><div class="kpi"><div class="l">${L('Total de l\'année', 'Year total')}</div><div class="v">${num(f.total)}</div><div class="s">FCFA</div></div><div class="kpi"><div class="l">${L('Payé', 'Paid')}</div><div class="v" style="color:var(--ok)">${num(f.paid + f.credited)}</div><div class="s">FCFA</div></div>
+      <div class="kpi dark"><div class="l">${L('Reste à payer', 'Balance')}</div><div class="v">${num(f.balance)}</div><div class="s">FCFA</div></div><div class="kpi"><div class="l">${L('En retard', 'Overdue')}</div><div class="v ${f.overdue ? 'badt' : ''}">${num(f.overdue)}</div><div class="s">FCFA</div></div></div>
+      <div class="bar" style="margin:-4px 0 14px"><i style="width:${f.total ? Math.min(100, ((f.paid + f.credited) / f.total) * 100) : 0}%"></i></div>
+      <div class="g2"><div class="card"><h2>${L('Échéancier', 'Schedule')}</h2>${f.items.map((i) => `<div class="lrow row between"><span><b>${esc(i.name)}</b><div class="muted sm">${L('avant le', 'due')} ${dt(i.due_date)}</div></span>${i.status === 'paid' ? `<span class="pill ok">${L('Payé', 'Paid')}</span>` : `<span class="${i.overdue ? 'badt' : ''}"><b>${money(i.balance)}</b></span>`}</div>`).join('')}
+        <h3 style="margin-top:16px">${L('Reçus', 'Receipts')}</h3>${f.receipts.map((r) => `<div class="lrow row between"><a target="_blank" href="/p/${token}/receipt/${r.id}" class="mono">${esc(r.number)}</a><span class="muted sm">${dt(r.created_at)}</span><b>${money(r.amount)}</b></div>`).join('') || '<p class="muted">—</p>'}</div>
+      <div class="card"><h2>${L('Payer par Mobile Money', 'Pay by Mobile Money')}</h2>${!sc.pay ? `<p class="muted">${L('Le paiement en ligne n\'est pas activé : réglez à l\'économat.', 'Online payment is off: please pay at the bursar\'s office.')}</p>` : !open.length ? `<p class="good">${L('Tout est réglé. Merci !', 'Everything is paid. Thank you!')}</p>` : `
+        <form id="pay"><label class="fld">${L('Que payez-vous ?', 'What are you paying?')}<select name="what"><option value="">${L('Le solde', 'The balance')} · ${money(f.balance)}</option>${open.map((i) => `<option value="${i.document_id}">${esc(i.name)} · ${money(i.balance)}</option>`).join('')}</select></label>
+        <label class="fld">${L('Montant (FCFA)', 'Amount (FCFA)')}<input name="amount" type="number" min="100" inputmode="numeric" value="${f.overdue || open[0].balance}"></label>
+        <label class="fld">${L('Numéro MTN MoMo ou Orange Money', 'MTN MoMo or Orange Money number')}<input name="phone" inputmode="tel" required placeholder="6XX XX XX XX" value="${esc(P.guardian?.phone || '')}"></label>
+        <button class="btn gold block">${L('Recevoir la demande de paiement', 'Get the payment prompt')}</button>${sc.momo.demo ? `<p class="muted sm">${L('Mode démonstration : le paiement est simulé.', 'Demo mode: payment is simulated.')}</p>` : ''}</form><div id="payst"></div>`}</div></div>`;
+    document.getElementById('pay')?.addEventListener('submit', async (e) => {
+      e.preventDefault(); const b = Object.fromEntries(new FormData(e.target)); const btn = e.target.querySelector('button'); btn.disabled = true;
+      try {
+        const r = await post(`/api/public/school/p/${token}/momo`, { phone: b.phone, amount: Number(b.amount), document_id: b.what || undefined });
+        const st = document.getElementById('payst');
+        st.innerHTML = `<div class="banner"><b>${L('Validez le paiement sur votre téléphone', 'Approve the payment on your phone')}</b><br>${money(r.amount)} · ${esc(r.document)}<br><span class="muted sm">${L('Composez *126# (MTN) ou #150*50# (Orange) si le message n\'apparaît pas.', 'Dial *126# (MTN) or #150*50# (Orange) if the prompt does not appear.')}</span></div>`;
+        for (let i = 0; i < 40; i++) {
+          await new Promise((res) => setTimeout(res, 3000));
+          const s = await get(`/api/public/school/p/${token}/momo/${r.payment_id}`);
+          if (s.status !== 'pending' && s.status !== 'failed') { st.innerHTML = `<div class="banner"><b class="good">✓ ${L('Paiement reçu', 'Payment received')}</b><br>${L('Reste', 'Balance')} : ${money(s.balance)}</div>`; toast(L('Paiement reçu, merci !', 'Payment received, thank you!')); setTimeout(() => portal(token), 1800); return; }
+          if (s.status === 'failed') { st.innerHTML = `<div class="banner bad"><b>${L('Paiement non abouti', 'Payment failed')}</b><br>${esc(s.failure_reason || '')}</div>`; btn.disabled = false; return; }
+        }
+      } catch (err) { toast(err.message, 1); btn.disabled = false; }
+    });
+  }
+  function courses(el) {
+    const m = location.hash.match(/course-(\d+)(?:-(\d+))?/);
+    if (m) return player(el, Number(m[1]), m[2] ? Number(m[2]) : null);
+    el.innerHTML = `<div class="courses">${P.courses.map((c) => `<a class="course" href="#courses-course-${c.id}"><div class="cover" style="--c:${esc(c.cover_color || '#15803D')}"><b>${esc(c.title)}</b><span>${esc(c.teacher_name || '')}</span></div>
+      <div class="bd"><span class="sm muted">${esc(c.subtitle || '')}</span><div class="bar"><i style="width:${c.pct}%"></i></div><div class="row between sm"><span>${c.done}/${c.total} ${L('leçons', 'lessons')}</span>${c.certificate_code ? `<span class="pill gold">🎓 ${L('Certifié', 'Certified')}</span>` : c.pending ? `<span class="pill warn">${L('Paiement attendu', 'Payment due')}</span>` : `<b>${c.pct} %</b>`}</div></div></a>`).join('') || `<div class="card"><p class="muted">${L('Aucun cours en ligne pour le moment.', 'No online course yet.')}</p></div>`}</div>`;
+  }
+  async function player(el, cid, lid) {
+    el.innerHTML = '<div class="spin"></div>';
+    let d; try { d = await get(`/api/public/school/p/${token}/lms/${cid}`); } catch (e) { el.innerHTML = `<div class="card">${esc(e.message)}</div>`; return; }
+    const c = d.course; const ls = d.lessons;
+    const cur = ls.find((l) => l.id === lid) || ls.find((l) => !l.done && !l.locked) || ls[0];
+    const pay = !d.access.ok && c.price > 0;
+    el.innerHTML = `<div class="card" style="background:linear-gradient(135deg,${esc(c.cover_color || '#15803D')},#0F3B2C);color:#fff"><a href="#courses" style="color:#fff;opacity:.8" class="sm">← ${L('Mes cours', 'My courses')}</a><h2 style="color:#fff;margin:6px 0 2px">${esc(c.title)}</h2><div class="sm" style="opacity:.85">${esc(c.teacher_name || '')} · ${d.progress.done}/${d.progress.total} ${L('leçons', 'lessons')}</div>
+      <div class="bar" style="margin-top:10px;background:rgba(255,255,255,.2)"><i style="width:${d.progress.pct}%"></i></div>${d.progress.certificate_code ? `<a class="btn gold sm" style="margin-top:10px" target="_blank" href="/v/cert/${esc(d.progress.certificate_code)}/print">🎓 ${L('Mon certificat', 'My certificate')}</a>` : ''}</div>
+      ${pay ? `<div class="card"><h3>${L('Débloquer le cours complet', 'Unlock the full course')} · ${money(c.price)}</h3><form id="cpay" class="row wrapf"><input name="phone" inputmode="tel" required placeholder="6XX XX XX XX" class="fld" style="flex:1;border:1.5px solid var(--line);border-radius:12px;padding:11px;margin:0"><button class="btn gold">${L('Payer par MoMo', 'Pay by MoMo')}</button></form><div id="cst"></div></div>` : ''}
+      <div class="player"><div class="card" id="lesson"></div><div>${ls.map((l, i) => `<div class="les ${cur && l.id === cur.id ? 'on' : ''} ${l.locked ? 'lock' : ''}" data-id="${l.id}"><span class="k ${l.done ? 'done' : ''}">${l.done ? '✓' : KI[l.kind] || i + 1}</span><span style="flex:1"><b>${esc(l.title)}</b><div class="muted sm">${esc(L(...KN[l.kind]))}${l.duration ? ` · ${l.duration} min` : ''}${l.score != null && l.kind === 'quiz' ? ` · ${l.score} %` : ''}${l.locked ? ' · 🔒' : ''}</div></span></div>`).join('')}</div></div>`;
+    el.querySelectorAll('.les').forEach((x) => x.addEventListener('click', () => { location.hash = `courses-course-${cid}-${x.dataset.id}`; }));
+    document.getElementById('cpay')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        await post(`/api/public/school/p/${token}/lms/${cid}/enroll`).catch(() => {});
+        const r = await post(`/api/public/school/p/${token}/lms/${cid}/pay`, { phone: e.target.phone.value });
+        document.getElementById('cst').innerHTML = `<p class="banner">${L('Validez le paiement sur votre téléphone…', 'Approve the payment on your phone…')}</p>`;
+        for (let i = 0; i < 40; i++) { await new Promise((res) => setTimeout(res, 3000)); const s = await get(`/api/public/school/p/${token}/momo/${r.payment_id}`); if (s.status !== 'pending') { if (s.status === 'failed') { toast(s.failure_reason || L('Paiement non abouti', 'Payment failed'), 1); } else { toast(L('Cours débloqué !', 'Course unlocked!')); player(el, cid, lid); } return; } }
+      } catch (err) { toast(err.message, 1); }
+    });
+    const box = document.getElementById('lesson');
+    if (!cur) { box.innerHTML = `<p class="muted">${L('Ce cours n\'a pas encore de leçon.', 'No lesson yet.')}</p>`; return; }
+    if (cur.locked) { box.innerHTML = `<h2>${esc(cur.title)}</h2><p class="muted">🔒 ${L('Débloquez le cours pour accéder à cette leçon.', 'Unlock the course to open this lesson.')}</p>`; return; }
+    const done = async (body) => {
+      try {
+        const r = await post(`/api/public/school/p/${token}/lms/lesson/${cur.id}`, body);
+        if (r.certificate_code) toast(`🎓 ${L('Cours terminé : certificat délivré !', 'Course complete: certificate issued!')}`); else if (r.score != null) toast(`${L('Score', 'Score')} : ${r.score} %${r.best != null ? ` (${L('meilleur', 'best')} ${r.best} %)` : ''}`); else toast(L('Leçon terminée', 'Lesson complete'));
+        const i = ls.findIndex((l) => l.id === cur.id); const nx = ls[i + 1];
+        location.hash = `courses-course-${cid}-${cur.kind === 'quiz' ? cur.id : nx ? nx.id : cur.id}`;
+        if (cur.kind === 'quiz' || !nx) player(el, cid, cur.id);
+      } catch (err) { toast(err.message, 1); }
+    };
+    let html = `<h2>${esc(cur.title)}</h2>`;
+    if (cur.kind === 'video') html += embed(cur.video_url) + (cur.content ? `<div class="content" style="margin-top:12px">${esc(cur.content)}</div>` : '');
+    if (cur.kind === 'text') html += `<div class="content">${esc(cur.content)}</div>`;
+    if (cur.kind === 'pdf') html += `${cur.content ? `<div class="content">${esc(cur.content)}</div>` : ''}<a class="btn primary" target="_blank" href="${esc(cur.video_url)}">📑 ${L('Ouvrir le document', 'Open the document')}</a>`;
+    if (cur.kind === 'live') html += `<p>${cur.starts_at ? `📅 <b>${esc(cur.starts_at.replace('T', ' '))}</b>` : ''}</p>${cur.content ? `<div class="content">${esc(cur.content)}</div>` : ''}<a class="btn primary" target="_blank" href="${esc(cur.room)}">● ${L('Rejoindre la classe en direct', 'Join the live class')}</a>`;
+    if (cur.kind === 'quiz') html += `${cur.content ? `<p class="muted">${esc(cur.content)}</p>` : ''}${cur.done ? `<div class="banner"><b>${L('Votre meilleur score', 'Your best score')} : ${cur.score} %</b> · ${L('vous pouvez retenter', 'you can try again')}</div>` : ''}<form id="qz">${cur.quiz.map((q, i) => `<div class="q"><b>${i + 1}. ${esc(q.q)}</b>${q.choices.map((ch, k) => `<label class="${cur.done && q.answer != null ? (q.answer === k ? 'right' : '') : ''}"><input type="radio" name="q${i}" value="${k}" required> ${esc(ch)}</label>`).join('')}${cur.done && q.explain ? `<div class="muted sm">💡 ${esc(q.explain)}</div>` : ''}</div>`).join('')}<button class="btn primary block">${L('Valider mes réponses', 'Submit my answers')}</button></form>`;
+    if (cur.kind === 'assignment') html += `<div class="content">${esc(cur.content)}</div>${cur.due_date ? `<p><b>${L('À rendre pour le', 'Due')} ${dt(cur.due_date)}</b> · /${cur.max_score}</p>` : ''}${cur.graded ? `<div class="banner"><b>${L('Note', 'Grade')} : ${dec(cur.score)}/${cur.max_score}</b>${cur.feedback ? `<br>${esc(cur.feedback)}` : ''}</div>` : `<form id="as"><label class="fld">${L('Votre travail (texte ou lien Google Drive, etc.)', 'Your work (text or a Drive link, etc.)')}<textarea name="answer" required>${esc(cur.answer || '')}</textarea></label><button class="btn primary block">${cur.done ? L('Remettre à nouveau', 'Resubmit') : L('Rendre le devoir', 'Submit')}</button></form>`}`;
+    if (!['quiz', 'assignment'].includes(cur.kind)) html += `<div style="margin-top:14px"><button class="btn ${cur.done ? '' : 'primary'} block" id="mk">${cur.done ? `✓ ${L('Terminée', 'Completed')}` : L('Marquer comme terminée', 'Mark as complete')}</button></div>`;
+    box.innerHTML = html;
+    document.getElementById('mk')?.addEventListener('click', () => done({}));
+    document.getElementById('qz')?.addEventListener('submit', (e) => { e.preventDefault(); const f = new FormData(e.target); done({ answers: cur.quiz.map((_, i) => Number(f.get('q' + i))) }); });
+    document.getElementById('as')?.addEventListener('submit', (e) => { e.preventDefault(); done({ answer: e.target.answer.value }); });
+  }
+  async function library(el) {
+    const lb = P.library;
+    el.innerHTML = `<div class="g2"><div class="card"><h2>${L('Mes emprunts', 'My loans')}</h2>${lb.loans.map((l) => `<div class="lrow row between"><span><b>${esc(l.title)}</b><div class="muted sm">${esc(l.authors || '')}</div></span>${l.returned_at ? `<span class="pill">${L('rendu', 'returned')}</span>` : `<span class="pill ${l.overdue ? 'bad' : 'ok'}">${L('retour', 'due')} ${dt(l.due_date)}</span>`}</div>${l.fine_due > 0 ? `<div class="sm badt">${L('Amende', 'Fine')} ${money(l.fine_due)}</div>` : ''}`).join('') || '<p class="muted">—</p>'}
+      ${lb.holds.length ? `<h3 style="margin-top:14px">${L('Réservations', 'Holds')}</h3>${lb.holds.map((h) => `<div class="lrow row between"><span>${esc(h.title)}</span><span class="pill ${h.status === 'ready' ? 'ok' : 'warn'}">${h.status === 'ready' ? L('Prêt à retirer', 'Ready') : L('En attente', 'Waiting')}</span></div>`).join('')}` : ''}</div>
+      <div class="card"><h2>${L('Catalogue', 'Catalogue')}</h2><form id="bs" class="row"><input name="q" placeholder="${L('Titre, auteur…', 'Title, author…')}" style="flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px"><button class="btn sm dark">${L('Chercher', 'Search')}</button></form><div id="br"></div></div></div>`;
+    const search = async (q = '') => {
+      const list = await get(`/api/public/school/p/${token}/books?q=${encodeURIComponent(q)}`);
+      document.getElementById('br').innerHTML = list.slice(0, 30).map((b) => `<div class="lrow row between"><span><b>${esc(b.title)}</b><div class="muted sm">${esc(b.authors || '')}${b.year ? ` · ${b.year}` : ''}</div></span>${b.ebook_url ? `<a class="btn sm" target="_blank" href="${esc(b.ebook_url)}">${L('Lire', 'Read')}</a>` : b.available ? `<span class="pill ok">${L('disponible', 'available')}</span>` : `<button class="btn sm" data-h="${b.id}">${L('Réserver', 'Hold')}</button>`}</div>`).join('') || `<p class="muted">—</p>`;
+      document.querySelectorAll('[data-h]').forEach((x) => x.addEventListener('click', async () => { try { const r = await post(`/api/public/school/p/${token}/hold`, { book_id: Number(x.dataset.h) }); toast(`${L('Réservé, position', 'Held, position')} ${r.position}`); x.disabled = true; } catch (e) { toast(e.message, 1); } }));
+    };
+    document.getElementById('bs').addEventListener('submit', (e) => { e.preventDefault(); search(e.target.q.value); });
+    search();
+  }
+  function news(el) {
+    el.innerHTML = `<div class="card">${P.announcements.map((a) => `<div class="ann ${a.pinned ? 'pin' : ''}"><div class="row between"><b>${a.pinned ? '📌 ' : ''}${esc(a.title)}</b><span class="pill">${esc(a.class_name || L('Toute l\'école', 'Whole school'))}</span></div><div class="muted sm">${dt(a.date)}</div><p style="white-space:pre-wrap;margin:6px 0 0">${esc(a.body)}</p></div>`).join('') || `<p class="muted">${L('Aucune annonce', 'No announcement')}</p>`}</div>`;
+  }
+
+  // ================= Admission =================
+  async function admission() {
+    let s; try { s = await get('/api/public/school'); } catch (e) { app.innerHTML = `<div class="card">${esc(e.message)}</div>`; return; }
+    document.title = `${L('Admission', 'Admission')} · ${s.name}`;
+    app.innerHTML = hero(s, `<h1>${L('Préinscription', 'Apply online')} ${esc(s.year || '')}</h1><p class="sub">${esc(s.motto || '')}</p>`, s.city) + `<main class="wrap" style="max-width:680px"><div class="card">
+      ${s.welcome ? `<p style="white-space:pre-wrap">${esc(s.welcome)}</p>` : ''}
+      ${!s.admissions_open ? `<div class="banner warn">${L('Les préinscriptions en ligne sont fermées pour le moment. Contactez le secrétariat', 'Online applications are closed for now. Contact the office')} ${esc(s.phone || '')}.</div>` : `
+      <div class="steps"><i class="on"></i><i class="on"></i><i></i></div>
+      <form id="ap"><h3>${L('L\'enfant / le candidat', 'The applicant')}</h3><div class="g2"><label class="fld">${L('Nom', 'Last name')} *<input name="last_name" required></label><label class="fld">${L('Prénom(s)', 'First name(s)')} *<input name="first_name" required></label>
+        <label class="fld">${L('Sexe', 'Sex')}<select name="sex"><option value="M">${L('Masculin', 'Male')}</option><option value="F">${L('Féminin', 'Female')}</option></select></label><label class="fld">${L('Date de naissance', 'Date of birth')}<input type="date" name="birth_date"></label>
+        <label class="fld">${L('Classe demandée', 'Class applied for')}<select name="level_id"><option value="">—</option>${s.levels.map((l) => `<option value="${l.id}">${esc(l.name)}${l.cycle ? ` · ${esc(l.cycle)}` : ''}</option>`).join('')}</select></label><label class="fld">${L('Moyenne de l\'an dernier', 'Last year\'s average')}<input name="last_average" type="number" step="0.01" min="0" max="20"></label></div>
+        <label class="fld">${L('Établissement d\'origine', 'Previous school')}<input name="previous_school"></label>
+        <h3>${L('Le parent / tuteur', 'Parent / guardian')}</h3><div class="g2"><label class="fld">${L('Nom complet', 'Full name')} *<input name="guardian_name" required></label><label class="fld">${L('Téléphone (WhatsApp)', 'Phone (WhatsApp)')} *<input name="guardian_phone" inputmode="tel" required placeholder="6XX XX XX XX"></label></div>
+        <label class="fld">E-mail<input type="email" name="guardian_email"></label><label class="fld">${L('Message (facultatif)', 'Message (optional)')}<textarea name="notes"></textarea></label>
+        <button class="btn primary block">${L('Envoyer la demande', 'Send the application')}</button></form>`}</div>
+      <div class="card sm muted">${esc(s.name)}${s.address ? ` · ${esc(s.address)}` : ''}${s.phone ? ` · ${esc(s.phone)}` : ''}${s.email ? ` · ${esc(s.email)}` : ''}</div>${foot}</main>`;
+    wireLang();
+    document.getElementById('ap')?.addEventListener('submit', async (e) => {
+      e.preventDefault(); const btn = e.target.querySelector('button'); btn.disabled = true;
+      try {
+        const r = await post('/api/public/school/apply', { ...Object.fromEntries(new FormData(e.target)), c: s.id });
+        e.target.closest('.card').innerHTML = `<div style="text-align:center"><div class="seal">✓</div><h2>${L('Demande reçue', 'Application received')}</h2><p>${L('Votre référence', 'Your reference')} : <b class="mono">${esc(r.reference)}</b></p><p class="muted">${L('Le secrétariat vous contacte sous 48 h pour l\'entretien et les pièces à fournir.', 'The office will call you within 48 hours about the interview and documents.')}</p></div>`;
+      } catch (err) { toast(err.message, 1); btn.disabled = false; }
+    });
+  }
+
+  // ================= Public course catalogue =================
+  async function learn() {
+    let d; try { d = await get('/api/public/school/learn'); } catch (e) { app.innerHTML = `<div class="card">${esc(e.message)}</div>`; return; }
+    document.title = `${L('Cours en ligne', 'Online courses')} · ${d.school.name}`;
+    const id = Number(location.hash.slice(1)) || null;
+    app.innerHTML = hero(d.school, `<h1>${L('Apprenez avec', 'Learn with')} ${esc(d.school.name)}</h1><p class="sub">${L('Cours vidéo, quiz corrigés, devoirs, classes en direct et certificat vérifiable. Paiement par MTN MoMo ou Orange Money.', 'Video lessons, auto-graded quizzes, assignments, live classes and a verifiable certificate. Pay with MTN MoMo or Orange Money.')}</p>`, L('Cours en ligne', 'Online courses')) + `<main class="wrap"><div id="cat"></div>${foot}</main>`;
+    wireLang();
+    const cat = document.getElementById('cat');
+    if (!id) {
+      cat.innerHTML = `<div class="courses">${d.courses.map((c) => `<a class="course" href="#${c.id}"><div class="cover" style="--c:${esc(c.cover_color || '#15803D')}"><span>${esc(c.category || '')}</span><b>${esc(c.title)}</b></div><div class="bd"><span class="sm muted">${esc(c.subtitle || '')}</span><span class="sm">${esc(c.teacher_name || '')}</span>
+        <div class="row between sm"><span>${c.lessons} ${L('leçons', 'lessons')} · ${Math.round(c.minutes / 6) / 10} h${c.certificate ? ' · 🎓' : ''}</span><b style="color:var(--g)">${c.price ? money(c.price) : L('Gratuit', 'Free')}</b></div></div></a>`).join('') || `<div class="card"><p class="muted">${L('Bientôt de nouveaux cours.', 'New courses coming soon.')}</p></div>`}</div>`;
+      return;
+    }
+    const c = await get(`/api/public/school/learn/${id}`);
+    cat.innerHTML = `<div class="player"><div class="card"><a href="#" class="sm">← ${L('Tous les cours', 'All courses')}</a><h2 style="margin-top:8px">${esc(c.title)}</h2><p class="muted">${esc(c.subtitle || '')}</p><p class="content">${esc(c.description || '')}</p>
+      <h3>${L('Programme', 'Curriculum')}</h3>${c.lessons_list.map((l, i) => `<div class="les"><span class="k">${KI[l.kind] || i + 1}</span><span style="flex:1"><b>${esc(l.title)}</b><div class="muted sm">${esc(L(...KN[l.kind]))}${l.duration ? ` · ${l.duration} min` : ''}${l.free_preview ? ` · <span class="pill ok">${L('aperçu gratuit', 'free preview')}</span>` : ''}</div></span></div>`).join('')}</div>
+      <div class="card" style="position:sticky;top:12px"><div class="kpi dark" style="margin-bottom:12px"><div class="l">${L('Prix', 'Price')}</div><div class="v">${c.price ? money(c.price) : L('Gratuit', 'Free')}</div><div class="s">${c.lessons} ${L('leçons', 'lessons')} · ${esc(c.teacher_name || '')}</div></div>
+        <form id="reg"><label class="fld">${L('Nom', 'Last name')}<input name="last_name" required></label><label class="fld">${L('Prénom', 'First name')}<input name="first_name" required></label><label class="fld">${L('Téléphone', 'Phone')}<input name="phone" inputmode="tel" required placeholder="6XX XX XX XX"></label><label class="fld">E-mail<input name="email" type="email"></label>
+        <button class="btn gold block">${c.price ? L('S\'inscrire et payer', 'Enrol and pay') : L('Commencer gratuitement', 'Start for free')}</button></form></div></div>`;
+    document.getElementById('reg').addEventListener('submit', async (e) => {
+      e.preventDefault(); const btn = e.target.querySelector('button'); btn.disabled = true;
+      try { const r = await post(`/api/public/school/learn/${id}/register`, Object.fromEntries(new FormData(e.target))); toast(L('Inscription réussie : gardez bien ce lien', 'Enrolled: keep this link safe')); setTimeout(() => { location.href = `/p/${r.token}#courses-course-${id}`; }, 900); } catch (err) { toast(err.message, 1); btn.disabled = false; }
+    });
+  }
+  window.addEventListener('hashchange', () => { if (location.pathname === '/learn') learn(); });
+
+  // ================= Research repository =================
+  async function research() {
+    const q = new URLSearchParams(location.search);
+    let d; try { d = await get(`/api/public/school/research?${q}`); } catch (e) { app.innerHTML = hero(null, `<h1>${esc(e.message)}</h1>`) + '<div class="wrap"></div>'; wireLang(); return; }
+    document.title = `${L('Dépôt de publications', 'Research repository')} · ${d.school.name}`;
+    const K = { article: ['Article', 'Article'], conference: ['Communication', 'Conference paper'], book: ['Ouvrage', 'Book'], chapter: ['Chapitre', 'Chapter'], thesis: ['Thèse', 'PhD thesis'], dissertation: ['Mémoire', 'Dissertation'], report: ['Rapport', 'Report'], dataset: ['Données', 'Dataset'], poster: ['Poster', 'Poster'] };
+    app.innerHTML = hero(d.school, `<h1>${L('Recherche et publications', 'Research & publications')}</h1><p class="sub">${L('Dépôt institutionnel en libre accès', 'Open-access institutional repository')} · ${d.stats.n} ${L('documents', 'documents')} · ${num(d.stats.downloads)} ${L('téléchargements', 'downloads')}</p>`, L('Dépôt ouvert', 'Open repository')) + `<main class="wrap">
+      <form class="card row wrapf" id="rf"><input name="q" value="${esc(q.get('q') || '')}" placeholder="${L('Titre, auteur, mot-clé', 'Title, author, keyword')}" style="flex:2;min-width:200px;border:1.5px solid var(--line);border-radius:12px;padding:10px">
+        <select name="field" style="flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px"><option value="">${L('Tous les domaines', 'All fields')}</option>${d.stats.fields.map((f) => `<option ${q.get('field') === f ? 'selected' : ''}>${esc(f)}</option>`).join('')}</select>
+        <select name="year" style="border:1.5px solid var(--line);border-radius:12px;padding:10px"><option value="">${L('Année', 'Year')}</option>${d.stats.years.map((y) => `<option ${q.get('year') == y ? 'selected' : ''}>${y}</option>`).join('')}</select><button class="btn dark">${L('Chercher', 'Search')}</button></form>
+      <div class="player"><div class="card">${d.publications.map((p) => `<div class="pub"><div class="row between"><span class="pill gold">${esc(L(...(K[p.kind] || [p.kind, p.kind])))}</span><span class="muted sm">${p.views} ${L('vues', 'views')} · ${p.downloads} ${L('téléch.', 'downloads')}</span></div><h3>${esc(p.title)}</h3><div class="muted">${esc(p.authors)} · ${p.year}${p.venue ? ` · <i>${esc(p.venue)}</i>` : ''}</div>
+        ${p.abstract ? `<details data-v="${esc(p.code)}"><summary class="sm" style="cursor:pointer;margin-top:6px">${L('Résumé', 'Abstract')}</summary><p class="sm">${esc(p.abstract)}</p>${p.keywords ? `<p class="sm muted">${L('Mots-clés', 'Keywords')} : ${esc(p.keywords)}</p>` : ''}</details>` : ''}
+        <div class="row wrapf" style="gap:6px;margin-top:8px">${p.has_file ? `<a class="btn sm primary" target="_blank" href="/research/file/${esc(p.code)}">PDF</a>` : ''}${p.doi ? `<a class="btn sm" target="_blank" href="https://doi.org/${esc(p.doi.replace(/^https?:\/\/doi.org\//, ''))}">DOI</a>` : ''}${p.url ? `<a class="btn sm" target="_blank" href="${esc(p.url)}">${L('Lien', 'Link')}</a>` : ''}<button class="btn sm" data-c="${esc(p.cite)}">${L('Citer', 'Cite')}</button></div></div>`).join('') || `<p class="muted">${L('Aucun résultat', 'No result')}</p>`}</div>
+      <div class="card"><h2>${L('Projets en cours', 'Ongoing projects')}</h2>${d.projects.map((x) => `<div class="lrow"><b>${esc(x.title)}</b><div class="muted sm">${esc(x.lead_name || '')}${x.lab ? ` · ${esc(x.lab)}` : ''}${x.field ? ` · ${esc(x.field)}` : ''}</div></div>`).join('') || '<p class="muted">—</p>'}</div></div>${foot}</main>`;
+    wireLang();
+    document.getElementById('rf').addEventListener('submit', (e) => { e.preventDefault(); const f = new URLSearchParams([...new FormData(e.target)].filter(([, v]) => v)); location.search = f.toString(); });
+    document.querySelectorAll('[data-c]').forEach((b) => b.addEventListener('click', () => { navigator.clipboard?.writeText(b.dataset.c); toast(L('Citation APA copiée', 'APA citation copied')); }));
+    document.querySelectorAll('details[data-v]').forEach((x) => x.addEventListener('toggle', () => { if (x.open && !x.dataset.done) { x.dataset.done = 1; post(`/api/public/school/research/${x.dataset.v}/view`).catch(() => {}); } }));
+  }
+
+  // ================= Verification =================
+  async function verify(kind, code) {
+    const url = kind === 'card' ? `/api/public/school/verify-card/${code}` : kind === 'cert' ? `/api/public/school/verify-cert/${code}` : `/api/public/school/verify/${code}`;
+    let d; try { d = await get(url); } catch (e) { d = { valid: false, error: e.message }; }
+    const title = kind === 'card' ? L('Carte d\'élève', 'Student card') : kind === 'cert' ? L('Certificat', 'Certificate') : L('Bulletin de notes', 'Report card');
+    const rows = !d.valid ? [] : kind === 'card' ? [[L('Nom', 'Name'), d.name], [L('Matricule', 'ID'), d.matricule], [L('Classe', 'Class'), d.class_name], [L('Année', 'Year'), d.year]]
+      : kind === 'cert' ? [[L('Titulaire', 'Holder'), d.name], [L('Cours', 'Course'), d.course], [L('Enseignant', 'Teacher'), d.teacher], [L('Obtenu le', 'Completed'), dt(d.completed_at)], ['Code', d.code]]
+        : [[L('Élève', 'Student'), d.name], [L('Matricule', 'ID'), d.matricule], [L('Classe', 'Class'), d.class_name], [L('Année', 'Year'), d.year], [L('Période', 'Period'), d.period], [L('Moyenne', 'Average'), `${dec(d.average)}/20`], [L('Rang', 'Rank'), d.rank ? `${d.rank}/${d.size}` : '—']];
+    app.innerHTML = hero({ name: d.school || 'Teknons École' }, `<h1>${L('Vérification', 'Verification')}</h1><p class="sub">${esc(title)} · <span class="mono">${esc(code)}</span></p>`, L('Document authentique ?', 'Genuine document?')) + `<main class="verify"><div class="card" style="text-align:center">
+      <div class="seal ${d.valid ? '' : 'no'}">${d.valid ? '✓' : '✕'}</div><h2>${d.valid ? L('Document authentique', 'Genuine document') : L('Document non reconnu', 'Document not recognised')}</h2>
+      ${d.valid ? `<p class="muted">${L('Délivré par', 'Issued by')} <b>${esc(d.school)}</b></p>${d.photo ? `<img src="${esc(d.photo)}" alt="" style="width:96px;height:96px;border-radius:50%;object-fit:cover">` : ''}<table style="text-align:left;margin-top:10px">${rows.map(([k, v]) => `<tr><th>${esc(k)}</th><td><b>${esc(v ?? '—')}</b></td></tr>`).join('')}</table>
+        ${kind === 'cert' ? `<a class="btn primary" style="margin-top:14px" target="_blank" href="/v/cert/${esc(code)}/print">${L('Voir le certificat', 'View the certificate')}</a>` : ''}`
+        : `<p class="muted">${L('Ce code ne correspond à aucun document émis. Le document présenté peut être falsifié : contactez l\'établissement.', 'This code matches no issued document. The document may be forged: contact the school.')}</p>`}</div>${foot}</main>`;
+    wireLang();
+  }
+
+  function route() {
+    const p = location.pathname;
+    let m;
+    if ((m = p.match(/^\/p\/([\w-]+)/))) return P ? renderPortal() : portal(m[1]);
+    if (p === '/admission') return admission();
+    if (p === '/learn') return learn();
+    if (p === '/research') return research();
+    if ((m = p.match(/^\/v\/cert\/([\w-]+)/))) return verify('cert', m[1]);
+    if ((m = p.match(/^\/v\/c\/([\w-]+)/))) return verify('card', m[1]);
+    if ((m = p.match(/^\/v\/([\w-]+)/))) return verify('bulletin', m[1]);
+    location.href = '/';
+  }
+  route();
+})();
+</script>
+</body>
+</html>

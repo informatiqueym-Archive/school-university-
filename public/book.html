@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0C2D3E">
+<title>Réserver</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--navy:#0C2D3E;--teal:#0E8F9B;--teal-l:#E3F4F5;--gold:#C9A227;--bg:#F5F3EE;--ink:#13232C;--muted:#5F6B72;--line:#E4E0D6;--ok:#14915F;--bad:#C93636}
+*{box-sizing:border-box}html,body{margin:0}
+body{font:15px/1.5 "Hanken Grotesk",system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+.hero{background:radial-gradient(120% 140% at 100% 0,#1A4F66 0,var(--navy) 55%);color:#fff;padding:28px 20px 90px;text-align:center}
+.hero .top{display:flex;justify-content:flex-end;max-width:980px;margin:0 auto}
+.lang{background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:99px;padding:6px 12px;font-weight:700;cursor:pointer}
+.stars{color:var(--gold);letter-spacing:4px}
+.hero h1{font:600 40px/1.1 "Cormorant Garamond",serif;margin:8px 0 6px}
+.hero p{color:#B9D3DC;margin:0 auto;max-width:560px}
+.wrap{max-width:980px;margin:-60px auto 40px;padding:0 14px}
+.card{background:#fff;border-radius:18px;padding:20px;box-shadow:0 8px 30px rgba(12,45,62,.08);margin-bottom:16px}
+.search{display:grid;grid-template-columns:1fr 1fr 120px auto;gap:10px;align-items:end}
+label.f{display:block;font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+label.f input,label.f select,label.f textarea{display:block;width:100%;margin-top:4px;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;font-size:15px;color:var(--ink);text-transform:none;letter-spacing:0;font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#2a1f00}
+.btn:disabled{opacity:.55}
+.room{display:grid;grid-template-columns:260px minmax(0,1fr);gap:18px;padding:0;overflow:hidden}
+.room .img{background:linear-gradient(135deg,#123B50,#0E8F9B) center/cover;min-height:200px;display:flex;align-items:flex-end;padding:14px;color:#fff;font:600 22px "Cormorant Garamond",serif}
+.room .body{padding:18px 18px 18px 0}
+.room h2{font:600 26px/1.1 "Cormorant Garamond",serif;margin:0 0 4px;color:var(--navy)}
+.amen{color:var(--muted);font-size:13.5px;margin:4px 0 10px}
+.offer{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);padding:12px 0}
+.offer .p{text-align:right}
+.offer .p b{font-size:20px;color:var(--navy);white-space:nowrap}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:2px 9px;background:var(--teal-l);color:#0A6A73;margin-right:4px}
+.tag.no{background:#FFF4DE;color:#A66300}
+.muted{color:var(--muted)}.sm{font-size:13px}
+.full{color:var(--bad);font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sum{background:var(--teal-l);border-radius:14px;padding:14px;margin:14px 0}
+.lrow{display:flex;justify-content:space-between;gap:10px;padding:6px 0}
+.prov{display:flex;gap:8px;margin-top:8px}
+.prov label{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-weight:700;cursor:pointer;background:#fff}
+.prov input{display:none}
+.prov label:has(input:checked){border-color:var(--teal);background:#fff;color:var(--teal)}
+.done{text-align:center}
+.done h2{font:600 32px "Cormorant Garamond",serif;color:var(--navy);margin:6px 0}
+.err{color:var(--bad);font-weight:600;margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 0 30px}
+@media (max-width:760px){.search{grid-template-columns:1fr 1fr}.search .btn{grid-column:1/-1}.room{grid-template-columns:1fr}.room .body{padding:0 16px 16px}.room .img{min-height:150px}.grid2{grid-template-columns:1fr}.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+<div id="app"><div class="hero"><h1>…</h1></div></div>
+<footer>Teknons Hôtel · <span id="fy"></span></footer>
+<script>
+'use strict';
+const H = new URLSearchParams(location.search).get('h') || '';
+let lang = (() => { try { return localStorage.getItem('tk:glang') || (navigator.language || 'fr').slice(0, 2); } catch { return 'fr'; } })();
+if (!['fr', 'en'].includes(lang)) lang = 'en';
+const L = (fr, en) => (lang === 'en' ? en : fr);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const money = (n) => `${Math.round(n || 0).toLocaleString('fr-FR').replace(/ | /g, ' ')} FCFA`;
+const dt = (d) => new Date(d + 'T12:00:00Z').toLocaleDateString(lang === 'en' ? 'en-GB' : 'fr-FR', { weekday: 'short', day: 'numeric', month: 'long', timeZone: 'UTC' });
+const add = (d, n) => { const x = new Date(d + 'T12:00:00Z'); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); };
+const $ = (s) => document.querySelector(s);
+async function api(path, body) {
+  const r = await fetch(path, body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {});
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.message || L('Une erreur est survenue', 'Something went wrong'));
+  return j;
+}
+let hotel = null, q = null, results = null, pick = null;
+async function start() {
+  try { hotel = await api(`/api/public/hotel?h=${encodeURIComponent(H)}`); }
+  catch (e) { $('#app').innerHTML = `<div class="hero"><h1>${L('Réservation indisponible', 'Booking unavailable')}</h1><p>${esc(e.message)}</p></div>`; return; }
+  document.title = `${L('Réserver', 'Book')} · ${hotel.name}`;
+  const a = hotel.business_date > new Date().toISOString().slice(0, 10) ? hotel.business_date : new Date().toISOString().slice(0, 10);
+  q = { arrival: a, departure: add(a, 2), adults: 2 };
+  render();
+}
+function render() {
+  $('#fy').textContent = hotel.name;
+  $('#app').innerHTML = `<div class="hero"><div class="top"><button class="lang" id="lang">${lang === 'fr' ? 'EN' : 'FR'}</button></div><div class="stars">${'★'.repeat(hotel.stars || 0)}</div><h1>${esc(hotel.name)}</h1><p>${esc([hotel.address, hotel.city].filter(Boolean).join(', '))}</p><p style="margin-top:6px">${L('Meilleur prix garanti en réservant ici', 'Best price guaranteed when booking here')}</p></div>
+  <div class="wrap"><div class="card"><form class="search" id="sf">
+    <label class="f">${L('Arrivée', 'Check-in')}<input type="date" name="arrival" value="${q.arrival}" min="${hotel.business_date}" required></label>
+    <label class="f">${L('Départ', 'Check-out')}<input type="date" name="departure" value="${q.departure}" required></label>
+    <label class="f">${L('Adultes', 'Adults')}<select name="adults">${[1, 2, 3, 4].map((n) => `<option ${n === Number(q.adults) ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+    <button class="btn primary">${L('Voir les chambres', 'See rooms')}</button></form></div>
+  <div id="res"></div></div>`;
+  $('#lang').onclick = () => { lang = lang === 'fr' ? 'en' : 'fr'; try { localStorage.setItem('tk:glang', lang); } catch {} render(); if (results) draw(); };
+  $('#sf').onsubmit = (e) => { e.preventDefault(); const f = new FormData(e.target); q = Object.fromEntries(f); if (q.departure <= q.arrival) q.departure = add(q.arrival, 1); search(); };
+  $('[name=arrival]').onchange = (e) => { const d = $('[name=departure]'); if (d.value <= e.target.value) d.value = add(e.target.value, 1); };
+  if (results) draw(); else search();
+}
+async function search() {
+  $('#res').innerHTML = `<div class="card muted">${L('Recherche des disponibilités…', 'Checking availability…')}</div>`;
+  try { results = await api(`/api/public/availability?h=${encodeURIComponent(H)}&arrival=${q.arrival}&departure=${q.departure}&adults=${q.adults}`); draw(); }
+  catch (e) { $('#res').innerHTML = `<div class="card err">${esc(e.message)}</div>`; }
+}
+function draw() {
+  const types = Object.fromEntries(hotel.types.map((t) => [t.id, t]));
+  const n = Math.round((new Date(q.departure) - new Date(q.arrival)) / 864e5);
+  $('#res').innerHTML = `<p class="muted" style="margin:0 4px 10px">${dt(q.arrival)} → ${dt(q.departure)} · ${n} ${L('nuit(s)', 'night(s)')} · ${q.adults} ${L('adulte(s)', 'adult(s)')}</p>` + (results.map((r) => { const t = types[r.type_id] || {}; return `<div class="card room">
+    <div class="img" style="${t.image ? `background-image:linear-gradient(transparent 50%,rgba(0,0,0,.5)),url('${esc(t.image)}')` : ''}">${t.image ? '' : '<span style="font-size:30px;opacity:.6">✦</span>'}</div>
+    <div class="body"><h2>${esc(r.name)}</h2><div class="sm muted">${L('Jusqu\'à', 'Up to')} ${t.capacity} ${L('personnes', 'guests')}</div>
+      ${t.amenities ? `<div class="amen">${esc(t.amenities)}</div>` : ''}${t.description ? `<p class="sm" style="margin:0 0 6px">${esc(t.description)}</p>` : ''}
+      ${r.free <= 0 ? `<p class="full">${L('Complet sur ces dates', 'Sold out for these dates')}</p>` : r.offers.map((o) => `<div class="offer"><div><b>${esc(o.plan)}</b><div>${o.breakfast ? `<span class="tag">${L('Petit-déjeuner inclus', 'Breakfast included')}</span>` : ''}${o.refundable ? `<span class="tag">${L('Annulation gratuite', 'Free cancellation')}</span>` : `<span class="tag no">${L('Non remboursable', 'Non-refundable')}</span>`}</div>${r.free <= 3 ? `<div class="sm" style="color:var(--bad)">${L('Plus que', 'Only')} ${r.free} ${L('chambre(s)', 'room(s) left')}</div>` : ''}</div>
+        <div class="p"><b>${money(o.total)}</b><div class="sm muted">${money(Math.round(o.total / Math.max(1, o.nights)))} / ${L('nuit', 'night')}, ${L('taxes incluses', 'taxes incl.')}</div><button class="btn primary" style="margin-top:6px" data-t="${r.type_id}" data-p="${o.plan_id}">${L('Réserver', 'Book')}</button></div></div>`).join('')}</div></div>`; }).join('') || `<div class="card">${L('Aucune chambre ne correspond. Essayez d\'autres dates.', 'No room matches. Try other dates.')}</div>`);
+  document.querySelectorAll('[data-t]').forEach((b) => b.onclick = () => { const r = results.find((x) => x.type_id === Number(b.dataset.t)); pick = { r, o: r.offers.find((o) => o.plan_id === Number(b.dataset.p)) }; form(); });
+}
+function form() {
+  const { r, o } = pick;
+  const momo = hotel.momo || {};
+  $('#res').innerHTML = `<div class="card"><button class="btn" id="back">← ${L('Retour', 'Back')}</button>
+    <h2 style="font:600 28px 'Cormorant Garamond',serif;color:var(--navy);margin:14px 0 4px">${esc(r.name)} · ${esc(o.plan)}</h2>
+    <div class="sum"><div class="lrow"><span>${dt(q.arrival)} → ${dt(q.departure)}</span><b>${o.nights} ${L('nuit(s)', 'night(s)')}</b></div>
+      <div class="lrow"><span>${L('Hébergement', 'Room')}</span><b>${money(o.room)}</b></div>${o.breakfast ? `<div class="lrow"><span>${L('Petits-déjeuners', 'Breakfasts')}</span><b>${money(o.breakfast)}</b></div>` : ''}
+      ${o.tax ? `<div class="lrow"><span>${L('Taxe de séjour', 'Tourist tax')}</span><b>${money(o.tax)}</b></div>` : ''}<div class="lrow" style="font-size:18px"><span><b>Total</b></span><b>${money(o.total)}</b></div>
+      ${o.deposit ? `<div class="lrow"><span>${L('Acompte pour garantir', 'Deposit to guarantee')} (${hotel.deposit_pct} %)</span><b>${money(o.deposit)}</b></div>` : ''}</div>
+    <form id="bf"><div class="grid2">
+      <label class="f">${L('Nom complet', 'Full name')} *<input name="name" required autocomplete="name"></label>
+      <label class="f">${L('Téléphone (WhatsApp)', 'Phone (WhatsApp)')} *<input name="phone" type="tel" required autocomplete="tel" placeholder="+237 6XX XX XX XX"></label>
+      <label class="f">E-mail<input name="email" type="email" autocomplete="email"></label>
+      <label class="f">${L('Nationalité', 'Nationality')}<input name="nationality"></label>
+      <label class="f">${L('Heure d\'arrivée prévue', 'Expected arrival time')}<input name="eta" type="time" value="${esc(hotel.checkin_time)}"></label>
+      <label class="f">${L('Enfants', 'Children')}<select name="children">${[0, 1, 2, 3].map((n) => `<option>${n}</option>`).join('')}</select></label></div>
+      <label class="f" style="margin-top:12px">${L('Demandes particulières', 'Special requests')}<textarea name="requests" rows="3" placeholder="${L('Transfert aéroport, lit bébé, anniversaire, étage élevé…', 'Airport transfer, baby cot, birthday, high floor…')}"></textarea></label>
+      ${o.deposit && (momo.mtn_momo || momo.orange_money) ? `<div class="sum" style="background:#FBF6E6"><label class="row" style="display:flex;gap:8px;align-items:center;font-weight:700"><input type="checkbox" name="pay" checked> ${L('Payer l\'acompte maintenant par Mobile Money', 'Pay the deposit now by Mobile Money')} (${money(o.deposit)})</label>
+        <div class="prov">${momo.mtn_momo ? '<label><input type="radio" name="provider" value="mtn_momo" checked> MTN MoMo</label>' : ''}${momo.orange_money ? `<label><input type="radio" name="provider" value="orange_money" ${momo.mtn_momo ? '' : 'checked'}> Orange Money</label>` : ''}</div>
+        <label class="f" style="margin-top:8px">${L('Numéro Mobile Money (si différent)', 'Mobile Money number (if different)')}<input name="pay_phone" type="tel"></label></div>` : ''}
+      <button class="btn gold" style="width:100%;margin-top:14px;padding:15px" id="go">${L('Confirmer ma réservation', 'Confirm my booking')}</button><div id="err" class="err"></div></form></div>`;
+  $('#back').onclick = draw;
+  $('#bf').onsubmit = async (e) => {
+    e.preventDefault(); const f = Object.fromEntries(new FormData(e.target)); $('#go').disabled = true; $('#err').textContent = '';
+    try {
+      const res = await api('/api/public/book', { h: H || hotel.id, type_id: r.type_id, plan_id: o.plan_id, arrival: q.arrival, departure: q.departure, adults: Number(q.adults), children: Number(f.children), name: f.name, phone: f.phone, email: f.email, nationality: f.nationality, eta: f.eta, requests: f.requests, pay: !!f.pay, provider: f.provider, pay_phone: f.pay_phone });
+      done(res);
+    } catch (err) { $('#err').textContent = err.message; $('#go').disabled = false; }
+  };
+}
+async function done(res) {
+  const link = `${location.origin}/g/${res.token}`;
+  $('#res').innerHTML = `<div class="card done"><div style="font-size:44px">✨</div><h2>${L('Merci, c\'est réservé !', 'Thank you, you\'re booked!')}</h2>
+    <p>${L('Votre numéro de réservation', 'Your booking number')} : <b>${esc(res.number)}</b> · ${L('total', 'total')} ${money(res.total)}</p>
+    <div id="pst" class="sum" ${res.payment ? '' : 'hidden'}>${L('Validez le paiement de l\'acompte sur votre téléphone (code secret Mobile Money)…', 'Approve the deposit payment on your phone (Mobile Money PIN)…')}</div>
+    <p class="muted">${L('Votre espace client : suivez votre réservation, payez, puis pendant le séjour commandez en chambre, réservez le spa et parlez à la conciergerie.', 'Your guest app: follow your booking, pay, then during your stay order to your room, book the spa and talk to the concierge.')}</p>
+    <a class="btn primary" href="${esc(link)}">${L('Ouvrir mon espace client', 'Open my guest app')}</a>
+    <p class="sm muted" style="margin-top:14px">${L('Gardez ce lien :', 'Keep this link:')} <a href="${esc(link)}">${esc(link)}</a></p></div>`;
+  if (!res.payment) return;
+  for (let i = 0; i < 40; i++) {
+    await new Promise((r) => setTimeout(r, 3000));
+    try {
+      const st = await api(`/api/portal/${res.token}/pay/${res.payment.id}`);
+      if (st.status === 'successful') { $('#pst').innerHTML = `<b style="color:var(--ok)">✓ ${L('Acompte reçu : votre chambre est garantie.', 'Deposit received: your room is guaranteed.')}</b>`; return; }
+      if (st.status === 'failed') { $('#pst').innerHTML = `<b style="color:var(--bad)">${L('Paiement non abouti', 'Payment not completed')}</b> · ${L('vous pouvez payer depuis votre espace client.', 'you can pay from your guest app.')}`; return; }
+    } catch {}
+  }
+}
+start();
+</script>
+</body>
+</html>

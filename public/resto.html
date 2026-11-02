@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#3A0F1C">
+<title>Menu</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--navy:#3A0F1C;--navy2:#4E1828;--ind:#C2681E;--ind-l:#F8EDE3;--gold:#D4A537;--bg:#F6F5F2;--ink:#22161A;--muted:#6E6266;--line:#EDE6E3;--ok:#14915F;--ok-bg:#E8F6EF;--bad:#C93636;--warn:#B7791F;--r:18px}
+*{box-sizing:border-box}html,body{margin:0}
+body{font:15px/1.5 "Hanken Grotesk",system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;padding-bottom:96px}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--ind)}
+.hero{background:radial-gradient(120% 160% at 100% 0,#7A2A3A 0,var(--navy) 58%);color:#fff;padding:20px 20px 62px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;border:1px solid rgba(255,255,255,.09);box-shadow:0 0 0 30px rgba(255,255,255,.03),0 0 0 60px rgba(255,255,255,.02)}
+.hero .top{display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.02em}
+.brand i{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--ind),#E9A25F);display:grid;place-items:center;font-style:normal}
+.hero h1{font:600 32px/1.08 Fraunces,serif;margin:16px 0 6px;position:relative;z-index:1}
+.hero .sub{color:#E8C9CF;font-size:14px;position:relative;z-index:1}
+.chip-t{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border-radius:99px;padding:5px 12px;font-weight:700;font-size:13px;margin-top:10px}
+.lang{background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:99px;padding:6px 12px;font-weight:700;cursor:pointer}
+.wrap{max-width:680px;margin:-42px auto 0;padding:0 14px;position:relative}
+.card{background:#fff;border-radius:var(--r);padding:18px;box-shadow:0 8px 28px rgba(58,15,28,.08);margin-bottom:14px}
+.card h2{font:600 22px/1.2 Fraunces,serif;margin:0 0 10px;color:var(--navy)}
+.row{display:flex;align-items:center;gap:10px}.between{justify-content:space-between}.wrapf{flex-wrap:wrap}
+.muted{color:var(--muted)}.sm{font-size:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 16px;font-weight:700;cursor:pointer;text-decoration:none;color:var(--ink)}
+.btn.primary{background:var(--ind);border-color:var(--ind);color:#fff}.btn.dark{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.block{width:100%}.btn:disabled{opacity:.5}
+.btn.sm{padding:7px 12px;font-size:13px;border-radius:10px}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.act{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:12px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:700;font-size:12.5px;cursor:pointer;text-align:center}
+.act span{font-size:22px}.act:active{transform:scale(.97)}
+.cats{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cats button{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:8px 14px;font-weight:700;cursor:pointer;white-space:nowrap}
+.cats button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.search{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;margin:4px 0 6px}
+.sec h3{font:600 20px Fraunces,serif;margin:18px 2px 10px;color:var(--navy)}
+.dish{display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:12px;background:#fff;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 2px 10px rgba(58,15,28,.05);cursor:pointer;border:1.5px solid transparent;position:relative}
+.dish:active{border-color:var(--ind)}
+.dish b{font-size:16px}.dish p{margin:4px 0 6px;color:var(--muted);font-size:13.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.dish .pr{font-weight:800;color:var(--navy)}.dish .pr s{color:var(--muted);font-weight:500;margin-right:6px}
+.dish .ph{width:96px;height:96px;border-radius:14px;background:linear-gradient(135deg,var(--ind-l),#F7EFDF) center/cover;display:grid;place-items:center;font-size:40px}
+.dish.out{opacity:.5;cursor:default}.dish .q{position:absolute;top:-6px;left:-6px;background:var(--ind);color:#fff;border-radius:99px;min-width:24px;height:24px;display:grid;place-items:center;font-weight:800;font-size:12px}
+.tags{display:flex;gap:4px;flex-wrap:wrap}.tags i{font-style:normal;font-size:11px;font-weight:700;background:var(--ind-l);color:var(--ind);border-radius:99px;padding:2px 8px}
+.tags i.al{background:#FFF4E5;color:var(--warn)}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(246,245,242,0),var(--bg) 30%);z-index:20}
+.bar .btn{max-width:652px;margin:0 auto;display:flex;width:100%;justify-content:space-between;box-shadow:0 10px 30px rgba(194,104,30,.35);padding:15px 18px;font-size:16px}
+.sheet-bg{position:fixed;inset:0;background:rgba(30,8,14,.5);z-index:40;display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
+.sheet{background:#fff;width:100%;max-width:680px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:20px 18px calc(18px + env(safe-area-inset-bottom));animation:up .25s cubic-bezier(.2,.8,.2,1)}
+.sheet h2{font:600 24px/1.15 Fraunces,serif;margin:0 0 6px;color:var(--navy)}
+.sheet .x{float:right;border:0;background:var(--bg);border-radius:99px;width:34px;height:34px;font-size:18px;cursor:pointer}
+@keyframes up{from{transform:translateY(40px);opacity:.3}}@keyframes fade{from{opacity:0}}
+.opt{margin:14px 0}.opt h4{margin:0 0 8px;font-size:14px;display:flex;gap:8px;align-items:center}
+.opt h4 em{font-style:normal;font-size:11px;background:#FDEDED;color:var(--bad);border-radius:99px;padding:1px 8px}
+.ch{display:flex;flex-wrap:wrap;gap:8px}
+.ch label{position:relative}.ch input{position:absolute;opacity:0}
+.ch span{display:inline-block;border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;font-weight:600;cursor:pointer}
+.ch input:checked+span{border-color:var(--ind);background:var(--ind-l);color:var(--ind)}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:14px}
+.qty button{border:0;background:none;width:42px;height:42px;font-size:20px;cursor:pointer}.qty b{min-width:28px;text-align:center}
+.in{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff}
+label.f{display:block;font-weight:600;font-size:13px;margin:10px 0 0}label.f .in{margin-top:5px}
+.lines .l{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.lines .l:last-child{border-bottom:0}.lines small{display:block;color:var(--muted)}
+.st{font-size:11px;font-weight:800;border-radius:99px;padding:2px 8px;white-space:nowrap}
+.st.received{background:#F4EFEC;color:var(--muted)}.st.kitchen,.st.cooking{background:#FFF4E5;color:var(--warn)}.st.ready{background:var(--ok-bg);color:var(--ok)}.st.served{background:var(--ind-l);color:var(--ind)}
+.tot{display:flex;justify-content:space-between;padding:4px 0}.tot.big{font-size:20px;font-weight:800;border-top:1px dashed var(--line);margin-top:6px;padding-top:10px}
+.steps{display:flex;justify-content:space-between;position:relative;margin:10px 0 4px}
+.steps:before{content:"";position:absolute;left:8%;right:8%;top:15px;height:3px;background:var(--line)}
+.steps div{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11.5px;font-weight:700;color:var(--muted);flex:1;text-align:center}
+.steps i{width:32px;height:32px;border-radius:50%;background:#fff;border:3px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:14px}
+.steps .on{color:var(--ink)}.steps .on i{border-color:var(--ind);background:var(--ind);color:#fff}
+.steps .cur i{box-shadow:0 0 0 6px rgba(194,104,30,.2);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 10px rgba(194,104,30,.06)}}
+.tips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.slots button{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 0;font-weight:700;cursor:pointer}
+.slots button.on{background:var(--navy);color:#fff;border-color:var(--navy)}.slots button:disabled{opacity:.35;text-decoration:line-through}
+.stars{display:flex;gap:6px;font-size:34px;justify-content:center}.stars button{border:0;background:none;cursor:pointer;color:#E2D9D6;padding:0}.stars button.on{color:var(--gold)}
+.ok{background:var(--ok-bg);color:var(--ok);border-radius:14px;padding:14px;font-weight:700;text-align:center}
+.err{background:#FDEDED;color:var(--bad);border-radius:12px;padding:10px 12px;font-weight:600;margin-top:10px}
+.toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);background:var(--navy);color:#fff;border-radius:14px;padding:12px 18px;font-weight:700;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:90vw;text-align:center}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:#F1EAE6;border-radius:14px;padding:4px;gap:4px}
+.seg button{border:0;border-radius:11px;padding:10px;font-weight:800;background:none;cursor:pointer}.seg button.on{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);color:var(--navy)}
+.wifi{display:flex;gap:10px;align-items:center;font-size:13px;background:var(--ind-l);border-radius:12px;padding:10px 12px;margin-top:12px}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin:24px 0 10px}
+.skel{height:120px;border-radius:16px;background:linear-gradient(90deg,#eee,#f6f6f6,#eee);background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+@media (max-width:420px){.acts{grid-template-columns:repeat(2,1fr)}.slots{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div id="app"><div class="hero"><div class="top"><div class="brand"><i>✦</i><span>…</span></div></div><h1>&nbsp;</h1></div><div class="wrap"><div class="card"><div class="skel"></div></div></div></div>
+<script>
+'use strict';
+let lang = (localStorage.getItem('tk:lang') || navigator.language || 'fr').slice(0, 2) === 'en' ? 'en' : 'fr';
+const L = (fr, en) => (lang === 'en' ? en : fr);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const money = (n) => `${Math.round(Number(n) || 0).toLocaleString('fr-FR').replace(/ | /g, ' ')} F`;
+const $ = (s, r = document) => r.querySelector(s);
+const app = $('#app');
+const parts = location.pathname.split('/').filter(Boolean);
+const mode = parts[0] === 'm' ? 'table' : parts[0] === 'o' ? 'track' : parts[0] === 'reserve' ? 'reserve' : 'order';
+const token = parts[1] || '';
+const cParam = new URLSearchParams(location.search).get('c') || '';
+let info = null, check = null, cart = [], cat = 'all', q = '', kind = 'takeaway', pollT = null;
+
+async function api(path, body) {
+  const r = await fetch(path, body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {});
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error?.message || j.message || L('Une erreur est survenue', 'Something went wrong'));
+  return j;
+}
+function toast(m) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = m; document.body.append(t); setTimeout(() => t.remove(), 3200); }
+const emoji = (n = '') => { const s = n.toLowerCase(); return /bi[eè]re|beer|castel|33|guinness/.test(s) ? '🍺' : /vin|wine|champagne/.test(s) ? '🍷' : /cocktail|mojito|spritz|gin|whisky|rhum/.test(s) ? '🍸' : /jus|juice|soda|eau|water|coca|café|coffee|thé|tea|bissap|gingembre/.test(s) ? '🥤' : /dessert|g[aâ]teau|tarte|glace|cake|fondant|crème/.test(s) ? '🍰' : /poisson|fish|bar|capitaine|crevette|gambas|sole|bar braisé/.test(s) ? '🐟' : /poulet|chicken|dg/.test(s) ? '🍗' : /b[oœ]uf|steak|entrec[oô]te|filet|brochette|soya|viande|côte/.test(s) ? '🥩' : /salade|avocat/.test(s) ? '🥗' : /ndol[eé]|eru|okok|kondr[eé]|sauce|mbongo|koki/.test(s) ? '🍲' : /frite|plantain|miondo|b[aâ]ton|riz/.test(s) ? '🍟' : '🍽️'; };
+const nm = (x) => (lang === 'en' && x.name_en ? x.name_en : x.name);
+const priceOf = (it) => it.happy ?? it.price;
+
+function hero(title, sub, extra = '') {
+  return `<div class="hero"><div class="top"><div class="brand"><i>✦</i><span>${esc(info?.name || 'Teknons Resto')}</span></div><button class="lang" id="lang">${lang === 'fr' ? 'EN' : 'FR'}</button></div>
+    <h1>${title}</h1><div class="sub">${sub}</div>${extra}</div>`;
+}
+function bindLang() { const b = $('#lang'); if (b) b.onclick = () => { lang = lang === 'fr' ? 'en' : 'fr'; try { localStorage.setItem('tk:lang', lang); } catch {} render(); }; }
+function sheet(html, onOpen) {
+  const bg = document.createElement('div'); bg.className = 'sheet-bg';
+  bg.innerHTML = `<div class="sheet"><button class="x" aria-label="close">×</button>${html}</div>`;
+  document.body.append(bg); document.body.style.overflow = 'hidden';
+  const close = () => { bg.remove(); document.body.style.overflow = ''; };
+  bg.onclick = (e) => { if (e.target === bg) close(); }; $('.x', bg).onclick = close;
+  onOpen?.($('.sheet', bg), close);
+  return close;
+}
+
+// ---------------- Menu ----------------
+function menuHtml() {
+  const m = info.menu; const ql = q.toLowerCase();
+  const items = m.items.filter((x) => (!ql || nm(x).toLowerCase().includes(ql) || (x.description || '').toLowerCase().includes(ql)));
+  const cats = m.categories.filter((c) => items.some((x) => x.category_id === c.id));
+  return `${m.happy_hour ? `<div class="card" style="background:linear-gradient(135deg,#FFF6DE,#FFFDF6);margin-bottom:10px"><b>🍹 Happy hour</b> · −${m.happy_hour} % ${L('sur les boissons, maintenant', 'on drinks, right now')}</div>` : ''}
+  <input class="search" id="q" type="search" placeholder="${L('Rechercher un plat, une boisson…', 'Search a dish, a drink…')}" value="${esc(q)}">
+  <div class="cats" id="cats"><button data-c="all" class="${cat === 'all' ? 'on' : ''}">${L('Tout', 'All')}</button>${cats.map((c) => `<button data-c="${c.id}" class="${String(c.id) === cat ? 'on' : ''}">${esc(lang === 'en' && c.name_en ? c.name_en : c.name)}</button>`).join('')}</div>
+  ${cats.map((c) => `<div class="sec" id="c${c.id}"><h3>${esc(lang === 'en' && c.name_en ? c.name_en : c.name)}</h3>${items.filter((x) => x.category_id === c.id).map(dishHtml).join('')}</div>`).join('') || `<p class="muted" style="text-align:center">${L('Aucun résultat.', 'No result.')}</p>`}`;
+}
+function dishHtml(x) {
+  const inCart = cart.filter((c) => c.product_id === x.id).reduce((t, c) => t + c.qty, 0);
+  const tags = String(x.tags || '').split(',').map((s) => s.trim()).filter(Boolean).slice(0, 3);
+  const desc = lang === 'en' && x.description_en ? x.description_en : x.description;
+  return `<div class="dish ${x.sold_out ? 'out' : ''}" data-i="${x.id}">${inCart ? `<span class="q">${inCart}</span>` : ''}<div><b>${esc(nm(x))}</b>${desc ? `<p>${esc(desc)}</p>` : ''}
+    <div class="tags" style="margin-bottom:6px">${tags.map((t) => `<i>${esc(t)}</i>`).join('')}${x.allergens ? `<i class="al">⚠ ${esc(x.allergens)}</i>` : ''}${x.sold_out ? `<i class="al">${L('Épuisé', 'Sold out')}</i>` : x.left != null && x.left <= 5 ? `<i class="al">${L('Plus que', 'Only')} ${x.left}</i>` : ''}</div>
+    <span class="pr">${x.happy ? `<s>${money(x.price)}</s>${money(x.happy)}` : money(x.price)}</span></div>
+    <div class="ph" ${x.image ? `style="background-image:url('${esc(x.image)}')"` : ''}>${x.image ? '' : emoji(x.name)}</div></div>`;
+}
+function wireMenu() {
+  const qi = $('#q'); if (qi) qi.oninput = (e) => { q = e.target.value; const pos = e.target.selectionStart; render(); const n = $('#q'); n.focus(); n.setSelectionRange(pos, pos); };
+  document.querySelectorAll('#cats [data-c]').forEach((b) => b.onclick = () => { cat = b.dataset.c; document.querySelectorAll('#cats button').forEach((x) => x.classList.toggle('on', x === b)); if (cat === 'all') window.scrollTo({ top: 0, behavior: 'smooth' }); else $('#c' + cat)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  document.querySelectorAll('[data-i]').forEach((d) => d.onclick = () => { const it = info.menu.items.find((x) => x.id === Number(d.dataset.i)); if (it && !it.sold_out) dishSheet(it); });
+}
+function dishSheet(it) {
+  let qty = 1;
+  const groups = it.options || [];
+  const desc = lang === 'en' && it.description_en ? it.description_en : it.description;
+  sheet(`${it.image ? `<div style="height:200px;border-radius:18px;background:url('${esc(it.image)}') center/cover;margin:30px 0 12px"></div>` : `<div style="font-size:64px;text-align:center;margin:20px 0 6px">${emoji(it.name)}</div>`}
+    <h2>${esc(nm(it))}</h2>${desc ? `<p class="muted" style="margin:0 0 8px">${esc(desc)}</p>` : ''}${it.allergens ? `<div class="tags"><i class="al">⚠ ${L('Allergènes', 'Allergens')} : ${esc(it.allergens)}</i></div>` : ''}
+    ${groups.map((g, gi) => `<div class="opt"><h4>${esc(g.group)} ${g.required ? `<em>${L('obligatoire', 'required')}</em>` : ''}</h4><div class="ch">${g.choices.map((c, ci) => `<label><input type="${g.multi ? 'checkbox' : 'radio'}" name="g${gi}" value="${esc(c.name)}" ${g.required && !g.multi && ci === 0 ? 'checked' : ''}><span>${esc(c.name)}${c.price ? ` +${money(c.price)}` : ''}</span></label>`).join('')}</div></div>`).join('')}
+    <label class="f">${L('Une précision pour la cuisine ?', 'A note for the kitchen?')}<input class="in" id="note" placeholder="${L('Sans piment, bien cuit…', 'No chili, well done…')}"></label>
+    <div class="row between" style="margin-top:16px"><div class="qty"><button id="m">−</button><b id="qv">1</b><button id="p">+</button></div><button class="btn primary" id="add" style="flex:1">${L('Ajouter', 'Add')} · <span id="pt"></span></button></div>`, (s, close) => {
+    const opts = () => { const o = []; groups.forEach((g, gi) => s.querySelectorAll(`[name=g${gi}]:checked`).forEach((i) => o.push(i.value))); return o; };
+    const unit = () => priceOf(it) + groups.flatMap((g) => g.choices).filter((c) => opts().includes(c.name)).reduce((t, c) => t + c.price, 0);
+    const upd = () => { $('#qv', s).textContent = qty; $('#pt', s).textContent = money(unit() * qty); };
+    s.addEventListener('change', upd); $('#m', s).onclick = () => { qty = Math.max(1, qty - 1); upd(); }; $('#p', s).onclick = () => { qty++; upd(); };
+    $('#add', s).onclick = () => {
+      const o = opts();
+      const miss = groups.find((g, gi) => g.required && !s.querySelector(`[name=g${gi}]:checked`));
+      if (miss) return toast(`${L('Choisissez', 'Choose')} : ${miss.group}`);
+      const note = $('#note', s).value.trim();
+      const same = cart.find((c) => c.product_id === it.id && c.options.join() === o.join() && c.note === note);
+      if (same) same.qty += qty; else cart.push({ product_id: it.id, name: nm(it), qty, options: o, note, unit: unit() });
+      close(); render(); toast(`${qty} × ${nm(it)} ${L('ajouté', 'added')}`);
+    };
+    upd();
+  });
+}
+const cartTotal = () => cart.reduce((t, c) => t + c.qty * c.unit, 0);
+const cartCount = () => cart.reduce((t, c) => t + c.qty, 0);
+function cartLines() {
+  return `<div class="lines">${cart.map((c, i) => `<div class="l"><span><b>${c.qty} × ${esc(c.name)}</b>${c.options.length ? `<small>${esc(c.options.join(', '))}</small>` : ''}${c.note ? `<small>“${esc(c.note)}”</small>` : ''}</span><span class="row"><b>${money(c.qty * c.unit)}</b><button class="btn sm" data-rm="${i}">−</button></span></div>`).join('')}</div>`;
+}
+
+// ---------------- Check (table and tracking) ----------------
+const ST = { received: ['Reçu', 'Received'], kitchen: ['En cuisine', 'In the kitchen'], cooking: ['En préparation', 'Cooking'], ready: ['Prêt', 'Ready'], served: ['Servi', 'Served'] };
+function checkHtml(c, compact) {
+  return `<div class="lines">${c.lines.map((l) => `<div class="l"><span><b>${l.qty} × ${esc(l.name)}</b>${l.options ? `<small>${esc(l.options)}</small>` : ''}</span><span style="text-align:right"><b>${l.comp ? L('Offert', 'On us') : money(l.total)}</b><br><span class="st ${l.state}">${esc(L(...(ST[l.state] || [l.state, l.state])))}</span></span></div>`).join('')}</div>
+    ${compact ? '' : `<div style="margin-top:8px">${c.discount ? `<div class="tot"><span>${L('Remise', 'Discount')}</span><span>−${money(c.discount)}</span></div>` : ''}${c.service_charge ? `<div class="tot"><span>Service</span><span>${money(c.service_charge)}</span></div>` : ''}${c.delivery_fee ? `<div class="tot"><span>${L('Livraison', 'Delivery')}</span><span>${money(c.delivery_fee)}</span></div>` : ''}${c.paid ? `<div class="tot"><span>${L('Déjà payé', 'Paid')}</span><span style="color:var(--ok)">${money(c.paid)}</span></div>` : ''}</div>`}
+    <div class="tot big"><span>${c.status === 'paid' ? L('Total réglé', 'Total paid') : c.paid ? L('Reste à payer', 'Left to pay') : 'Total'}</span><span>${money(c.status === 'paid' ? c.total : c.due)}</span></div>`;
+}
+const anyMomo = () => Object.values(info.momo || {}).some(Boolean);
+function paySheet(c) {
+  const tips = info.tips?.length ? info.tips : [5, 10, 15];
+  let share = c.due, tipPct = 0, provider = Object.keys(info.momo).find((p) => info.momo[p]) || 'mtn_momo';
+  sheet(`<h2>${L('Payer l\'addition', 'Pay the bill')}</h2><p class="muted" style="margin:0">${L('Payez en toute sécurité depuis votre téléphone. Vous confirmez avec votre code secret Mobile Money.', 'Pay securely from your phone. You confirm with your Mobile Money PIN.')}</p>
+    <div class="opt"><h4>${L('Que payez-vous ?', 'What are you paying?')}</h4><div class="ch" id="sh">${[1, 2, 3, 4].map((n) => `<label><input type="radio" name="sh" value="${n}" ${n === 1 ? 'checked' : ''}><span>${n === 1 ? L('Tout', 'All') : `${L('Ma part', 'My share')} ÷${n}`}</span></label>`).join('')}</div></div>
+    <div class="opt"><h4>${L('Pourboire pour l\'équipe', 'Tip for the team')} ${c.server ? `· ${esc(c.server)}` : ''}</h4><div class="tips ch">${[0, ...tips].map((p) => `<label><input type="radio" name="tp" value="${p}" ${p === 0 ? 'checked' : ''}><span style="width:100%;text-align:center">${p ? `${p} %` : L('Non', 'No')}</span></label>`).join('')}</div></div>
+    <div class="opt"><h4>${L('Moyen de paiement', 'Payment method')}</h4><div class="ch">${Object.entries({ mtn_momo: 'MTN MoMo', orange_money: 'Orange Money' }).filter(([k]) => info.momo[k]).map(([k, l]) => `<label><input type="radio" name="pv" value="${k}" ${k === provider ? 'checked' : ''}><span>${l}</span></label>`).join('')}</div></div>
+    <label class="f">${L('Votre numéro Mobile Money', 'Your Mobile Money number')}<input class="in" id="ph" type="tel" inputmode="tel" placeholder="6XX XX XX XX"></label>
+    <label class="f">${L('Votre prénom (facultatif)', 'Your first name (optional)')}<input class="in" id="py"></label>
+    <div class="tot big" style="margin-top:14px"><span>${L('Vous payez', 'You pay')}</span><span id="pt"></span></div>
+    <button class="btn primary block" id="go" style="margin-top:10px">${L('Payer maintenant', 'Pay now')}</button><div id="msg"></div>`, (s, close) => {
+    const upd = () => { const n = Number(s.querySelector('[name=sh]:checked').value); share = n === 1 ? c.due : Math.ceil(c.due / n / 25) * 25; tipPct = Number(s.querySelector('[name=tp]:checked').value); provider = s.querySelector('[name=pv]:checked')?.value || provider; $('#pt', s).textContent = money(share + tip()); };
+    const tip = () => Math.round(share * tipPct / 100 / 50) * 50;
+    s.addEventListener('change', upd); upd();
+    $('#go', s).onclick = async (e) => {
+      const ph = $('#ph', s).value.replace(/\D/g, '');
+      if (ph.length < 9) return toast(L('Saisissez votre numéro', 'Enter your number'));
+      e.target.disabled = true;
+      try {
+        const r = await api(`/api/public/resto/check/${c.token}/pay`, { provider, phone: ph, amount: Math.min(share, c.due), tip: tip(), payer: $('#py', s).value });
+        $('#msg', s).innerHTML = `<div class="ok" style="background:var(--ind-l);color:var(--navy);margin-top:12px">📱 ${L('Validez le paiement sur votre téléphone avec votre code secret…', 'Approve the payment on your phone with your PIN…')}${r.mode === 'simulation' ? `<div class="sm muted">${L('(démonstration : confirmé automatiquement en 5 s)', '(demo: auto-confirmed in 5 s)')}</div>` : ''}</div>`;
+        const t0 = Date.now();
+        const poll = async () => {
+          const st = await api(`/api/public/resto/check/${c.token}/pay/${r.id}`).catch(() => ({ status: 'pending' }));
+          if (st.status === 'successful') { check = st.check; close(); render(); toast(L('Paiement reçu, merci !', 'Payment received, thank you!')); if (check.status === 'paid' && !check.reviewed) setTimeout(() => reviewSheet(check), 700); return; }
+          if (st.status === 'failed') { $('#msg', s).innerHTML = `<div class="err">${L('Paiement non abouti', 'Payment failed')} ${esc(st.reason || '')}</div>`; e.target.disabled = false; return; }
+          if (Date.now() - t0 < 300e3) setTimeout(poll, 2500);
+        };
+        setTimeout(poll, 2500);
+      } catch (err) { $('#msg', s).innerHTML = `<div class="err">${esc(err.message)}</div>`; e.target.disabled = false; }
+    };
+  });
+}
+function reviewSheet(c) {
+  let rating = 0;
+  sheet(`<h2>${L('Comment était-ce ?', 'How was it?')}</h2><p class="muted" style="margin:0 0 10px">${L('Votre avis va directement au gérant.', 'Your review goes straight to the manager.')}</p>
+    <div class="stars" id="sr">${[1, 2, 3, 4, 5].map((n) => `<button data-r="${n}">★</button>`).join('')}</div>
+    ${['food', 'service', 'ambiance'].map((k) => `<div class="row between" style="margin-top:10px"><span class="sm"><b>${{ food: L('Cuisine', 'Food'), service: L('Service', 'Service'), ambiance: L('Ambiance', 'Atmosphere') }[k]}</b></span><select class="in" id="${k}" style="width:auto"><option value="">—</option>${[5, 4, 3, 2, 1].map((n) => `<option>${n}</option>`).join('')}</select></div>`).join('')}
+    <label class="f">${L('Un mot ?', 'Anything to add?')}<textarea class="in" id="cm" rows="3"></textarea></label>
+    <button class="btn primary block" id="send" style="margin-top:12px" disabled>${L('Envoyer mon avis', 'Send my review')}</button>`, (s, close) => {
+    s.querySelectorAll('[data-r]').forEach((b) => b.onclick = () => { rating = Number(b.dataset.r); s.querySelectorAll('[data-r]').forEach((x) => x.classList.toggle('on', Number(x.dataset.r) <= rating)); $('#send', s).disabled = false; });
+    $('#send', s).onclick = () => api(`/api/public/resto/check/${c.token}/feedback`, { rating, food: $('#food', s).value, service: $('#service', s).value, ambiance: $('#ambiance', s).value, comment: $('#cm', s).value })
+      .then(() => { check.reviewed = true; close(); render(); toast(L('Merci pour votre avis !', 'Thanks for your review!')); }).catch((e) => toast(e.message));
+  });
+}
+
+// ---------------- Pages ----------------
+function renderTable() {
+  const t = info.table;
+  const c = check;
+  const counts = cartCount();
+  app.innerHTML = `${hero(esc(info.welcome ? (lang === 'en' ? 'Welcome' : 'Bienvenue') : info.name), `${esc(info.cuisine || '')}`, `<div class="chip-t">🪑 ${L('Table', 'Table')} ${esc(t.label)} · ${esc(t.area)}</div>`)}
+  <div class="wrap">
+    <div class="card">${info.welcome ? `<p style="margin:0 0 12px">${esc(info.welcome)}</p>` : ''}
+      <div class="acts"><button class="act" data-call="waiter"><span>🙋</span>${L('Appeler le serveur', 'Call waiter')}</button><button class="act" data-call="water"><span>💧</span>${L('Eau / pain', 'Water / bread')}</button><button class="act" data-call="bill"><span>🧾</span>${L('L\'addition', 'The bill')}</button>${c && c.due > 0 && info.qr_pay && anyMomo() ? `<button class="act" id="pay" style="border-color:var(--ind);color:var(--ind)"><span>📱</span>${L('Payer ici', 'Pay here')}</button>` : `<button class="act" data-call="other"><span>💬</span>${L('Autre', 'Other')}</button>`}</div>
+      ${info.wifi_name ? `<div class="wifi">📶 <span>Wi-Fi <b>${esc(info.wifi_name)}</b>${info.wifi_password ? ` · ${L('mot de passe', 'password')} <b>${esc(info.wifi_password)}</b>` : ''}</span></div>` : ''}</div>
+    ${c && c.lines.length ? `<div class="card"><div class="row between"><h2 style="margin:0">${L('Votre table', 'Your table')}</h2>${c.server ? `<span class="muted sm">${L('Serveur', 'Waiter')} : <b>${esc(c.server)}</b></span>` : ''}</div>${checkHtml(c)}
+      ${c.status === 'paid' ? `<div class="ok" style="margin-top:12px">✓ ${L('Addition réglée. Merci et à bientôt !', 'Bill settled. Thank you, see you soon!')}</div>${c.reviewed ? '' : `<button class="btn block" id="rev" style="margin-top:10px">★ ${L('Donner mon avis', 'Leave a review')}</button>`}`
+      : c.due > 0 && info.qr_pay && anyMomo() ? `<button class="btn dark block" id="pay2" style="margin-top:12px">📱 ${L('Payer avec Mobile Money', 'Pay with Mobile Money')}</button>` : ''}</div>` : ''}
+    ${info.qr_ordering ? menuHtml() : `<div class="card"><p class="muted" style="margin:0">${L('Consultez la carte ci-dessous et appelez le serveur pour commander.', 'Browse the menu and call the waiter to order.')}</p></div>${menuHtml()}`}
+    <div class="foot">${esc(info.name)}${info.phone ? ` · ${esc(info.phone)}` : ''}<br>${L('Propulsé par', 'Powered by')} Teknons Resto</div>
+  </div>
+  ${counts ? `<div class="bar"><button class="btn primary" id="cart"><span>🛒 ${counts} ${L('article(s)', 'item(s)')}</span><span>${L('Voir le panier', 'View cart')} · ${money(cartTotal())}</span></button></div>` : ''}`;
+  bindLang(); wireMenu();
+  document.querySelectorAll('[data-call]').forEach((b) => b.onclick = () => api(`/api/public/resto/table/${token}/call`, { kind: b.dataset.call }).then(() => toast({ waiter: L('Le serveur arrive', 'Your waiter is coming'), water: L('C\'est noté, on vous apporte ça', 'Noted, on its way'), bill: L('L\'addition arrive', 'The bill is on its way'), other: L('Le serveur arrive', 'Your waiter is coming') }[b.dataset.call])).catch((e) => toast(e.message)));
+  [$('#pay'), $('#pay2')].forEach((b) => b && (b.onclick = () => paySheet(c)));
+  $('#rev')?.addEventListener('click', () => reviewSheet(c));
+  $('#cart')?.addEventListener('click', () => {
+    if (!info.qr_ordering) return toast(L('Appelez le serveur pour commander', 'Call the waiter to order'));
+    sheet(`<h2>${L('Votre commande', 'Your order')}</h2><p class="muted sm" style="margin:0">${L('Table', 'Table')} ${esc(t.label)}</p>${cartLines()}<div class="tot big"><span>Total</span><span>${money(cartTotal())}</span></div>
+      ${c ? '' : `<label class="f">${L('Vous êtes combien ?', 'How many are you?')}<input class="in" id="cv" type="number" min="1" value="2"></label>`}<label class="f">${L('Votre prénom (facultatif)', 'Your first name (optional)')}<input class="in" id="nmv"></label>
+      <button class="btn primary block" id="send" style="margin-top:14px">${L('Envoyer la commande', 'Send order')}</button><p class="muted sm" style="text-align:center">${L('Votre serveur valide la commande et l\'envoie en cuisine. Vous suivez la préparation ici.', 'Your waiter confirms and sends it to the kitchen. Follow it here.')}</p>`, (s, close) => {
+      s.querySelectorAll('[data-rm]').forEach((b) => b.onclick = () => { const i = Number(b.dataset.rm); cart[i].qty > 1 ? cart[i].qty-- : cart.splice(i, 1); close(); render(); if (cart.length) $('#cart').click(); });
+      $('#send', s).onclick = async (e) => {
+        e.target.disabled = true;
+        try { check = await api(`/api/public/resto/table/${token}/order`, { lines: cart.map((x) => ({ product_id: x.product_id, qty: x.qty, options: x.options, note: x.note })), covers: Number($('#cv', s)?.value) || undefined, name: $('#nmv', s).value }); cart = []; close(); render(); toast(L('Commande envoyée ! Le serveur arrive.', 'Order sent! Your waiter is on it.')); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        catch (err) { toast(err.message); e.target.disabled = false; }
+      };
+    });
+  });
+  schedulePoll(async () => { const r = await api(`/api/public/resto/table/${token}`); check = r.check; info = { ...r, check: undefined }; if (!document.querySelector('.sheet-bg') && document.activeElement?.id !== 'q') render(); });
+}
+
+function renderTrack() {
+  const c = check;
+  const delivery = c.kind === 'delivery';
+  const steps = delivery ? [['received', '🧾', L('Reçue', 'Received')], ['cooking', '👩🏾‍🍳', L('En cuisine', 'Cooking')], ['ready', '🛍', L('Prête', 'Ready')], ['on_the_way', '🛵', L('En route', 'On the way')], ['delivered', '🏠', L('Livrée', 'Delivered')]]
+    : [['received', '🧾', L('Reçue', 'Received')], ['cooking', '👩🏾‍🍳', L('En cuisine', 'Cooking')], ['ready', '🛍', L('Prête', 'Ready')], ['served', '✓', c.kind === 'dine_in' ? L('Servie', 'Served') : L('Retirée', 'Picked up')]];
+  const ls = c.lines.map((l) => l.state);
+  let cur = 'received';
+  if (ls.length && ls.every((s) => s === 'served')) cur = 'served';
+  else if (ls.length && ls.every((s) => ['ready', 'served'].includes(s))) cur = 'ready';
+  else if (ls.some((s) => ['kitchen', 'cooking', 'ready'].includes(s))) cur = 'cooking';
+  if (delivery && ['on_the_way', 'delivered'].includes(c.delivery_status)) cur = c.delivery_status;
+  if (!delivery && c.status === 'paid' && cur === 'ready' && c.kind === 'dine_in') cur = 'served';
+  const idx = steps.findIndex((s) => s[0] === cur);
+  app.innerHTML = `${hero(c.status === 'void' ? L('Commande annulée', 'Order cancelled') : idx >= steps.length - 1 ? L('Merci !', 'Thank you!') : cur === 'ready' ? (delivery ? L('Votre commande est prête', 'Your order is ready') : L('C\'est prêt !', 'It\'s ready!')) : L('Nous préparons votre commande', 'We\'re preparing your order'), `${L('Commande', 'Order')} ${esc(c.number)}${c.pickup_time ? ` · ${delivery ? L('livraison vers', 'delivery around') : L('retrait à', 'pick-up at')} ${esc(c.pickup_time)}` : ''}`)}
+  <div class="wrap"><div class="card"><div class="steps">${steps.map(([k, ic, l], i) => `<div class="${i <= idx ? 'on' : ''} ${i === idx && i < steps.length - 1 ? 'cur' : ''}"><i>${ic}</i>${esc(l)}</div>`).join('')}</div>
+    ${delivery && c.address ? `<p class="sm muted" style="margin:12px 0 0">📍 ${esc(c.address)}</p>` : ''}</div>
+    <div class="card"><h2>${L('Détail', 'Details')}</h2>${checkHtml(c)}
+      ${c.status === 'open' && c.due > 0 && anyMomo() ? `<button class="btn dark block" id="pay" style="margin-top:12px">📱 ${L('Payer maintenant par Mobile Money', 'Pay now with Mobile Money')}</button><p class="muted sm" style="text-align:center;margin-bottom:0">${delivery ? L('Ou payez au livreur à la livraison.', 'Or pay the courier on delivery.') : L('Ou payez sur place.', 'Or pay on site.')}</p>` : ''}
+      ${c.status === 'paid' ? `<div class="ok" style="margin-top:12px">✓ ${L('Payée', 'Paid')} · ${money(c.total)}</div>` : ''}
+      ${c.status === 'paid' && !c.reviewed ? `<button class="btn block" id="rev" style="margin-top:10px">★ ${L('Donner mon avis', 'Leave a review')}</button>` : ''}</div>
+    <div class="foot">${esc(info.name)}${info.phone ? ` · <a href="tel:${esc(info.phone)}">${esc(info.phone)}</a>` : ''}<br>${L('Propulsé par', 'Powered by')} Teknons Resto</div></div>`;
+  bindLang();
+  $('#pay')?.addEventListener('click', () => paySheet(c));
+  $('#rev')?.addEventListener('click', () => reviewSheet(c));
+  if (c.status !== 'void' && !(c.status === 'paid' && idx >= steps.length - 1)) schedulePoll(async () => { const r = await api(`/api/public/resto/check/${token}`); check = r.check; if (!document.querySelector('.sheet-bg')) render(); });
+}
+
+function renderOrder() {
+  if (!info.online_orders) { app.innerHTML = `${hero(L('Commandes en ligne fermées', 'Online ordering closed'), L('Revenez plus tard ou appelez-nous.', 'Come back later or call us.'))}<div class="wrap"><div class="card">${info.phone ? `<a class="btn primary block" href="tel:${esc(info.phone)}">📞 ${esc(info.phone)}</a>` : ''}</div></div>`; bindLang(); return; }
+  const counts = cartCount();
+  app.innerHTML = `${hero(L('Commandez en ligne', 'Order online'), `${esc(info.cuisine || '')}${info.open_time ? ` · ${L('ouvert', 'open')} ${esc(info.open_time)}–${esc(info.close_time)}` : ''}`)}
+  <div class="wrap"><div class="card"><div class="seg"><button data-k="takeaway" class="${kind === 'takeaway' ? 'on' : ''}">🛍 ${L('À emporter', 'Takeaway')}</button><button data-k="delivery" class="${kind === 'delivery' ? 'on' : ''}">🛵 ${L('Livraison', 'Delivery')}</button></div>
+    <p class="muted sm" style="margin:10px 0 0">${kind === 'delivery' ? `${L('Livraison', 'Delivery')} ${money(info.delivery_fee)} · ${L('minimum', 'minimum')} ${money(info.min_delivery)}` : L('Prête en 20 à 30 minutes environ. Nous vous prévenons par WhatsApp.', 'Ready in about 20 to 30 minutes.')}</p></div>
+    ${menuHtml()}<div class="foot">${esc(info.name)}${info.address ? ` · ${esc(info.address)}` : ''}<br>${L('Propulsé par', 'Powered by')} Teknons Resto</div></div>
+  ${counts ? `<div class="bar"><button class="btn primary" id="cart"><span>🛒 ${counts}</span><span>${L('Commander', 'Checkout')} · ${money(cartTotal() + (kind === 'delivery' ? info.delivery_fee : 0))}</span></button></div>` : ''}`;
+  bindLang(); wireMenu();
+  document.querySelectorAll('[data-k]').forEach((b) => b.onclick = () => { kind = b.dataset.k; render(); });
+  $('#cart')?.addEventListener('click', () => {
+    const fee = kind === 'delivery' ? info.delivery_fee : 0;
+    sheet(`<h2>${kind === 'delivery' ? L('Livraison', 'Delivery') : L('À emporter', 'Takeaway')}</h2>${cartLines()}
+      ${fee ? `<div class="tot"><span>${L('Livraison', 'Delivery')}</span><span>${money(fee)}</span></div>` : ''}<div class="tot big"><span>Total</span><span>${money(cartTotal() + fee)}</span></div>
+      ${kind === 'delivery' && cartTotal() < info.min_delivery ? `<div class="err">${L('Minimum pour la livraison', 'Delivery minimum')} : ${money(info.min_delivery)}</div>` : ''}
+      <label class="f">${L('Nom', 'Name')}<input class="in" id="n" autocomplete="name"></label><label class="f">${L('Téléphone (WhatsApp)', 'Phone (WhatsApp)')}<input class="in" id="p" type="tel" autocomplete="tel" placeholder="6XX XX XX XX"></label>
+      ${kind === 'delivery' ? `<label class="f">${L('Adresse et repère', 'Address and landmark')}<textarea class="in" id="a" rows="2" placeholder="${L('Bonapriso, rue Tokoto, portail vert après la pharmacie', 'Bonapriso, Tokoto street, green gate after the pharmacy')}"></textarea></label>` : ''}
+      <label class="f">${kind === 'delivery' ? L('Heure souhaitée', 'Wanted time') : L('Heure de retrait', 'Pick-up time')}<input class="in" id="t" type="time"></label><label class="f">${L('Note', 'Note')}<input class="in" id="nt"></label>
+      <button class="btn primary block" id="go" style="margin-top:14px">${L('Valider la commande', 'Place order')}</button><p class="muted sm" style="text-align:center">${anyMomo() ? L('Vous pourrez payer par Mobile Money à l\'étape suivante, ou à la livraison.', 'You can pay by Mobile Money next, or on delivery.') : L('Paiement à la livraison ou au retrait.', 'Pay on delivery or pick-up.')}</p>`, (s, close) => {
+      s.querySelectorAll('[data-rm]').forEach((b) => b.onclick = () => { const i = Number(b.dataset.rm); cart[i].qty > 1 ? cart[i].qty-- : cart.splice(i, 1); close(); render(); if (cart.length) $('#cart').click(); });
+      try { const saved = JSON.parse(localStorage.getItem('tk:guest') || '{}'); $('#n', s).value = saved.n || ''; $('#p', s).value = saved.p || ''; if ($('#a', s)) $('#a', s).value = saved.a || ''; } catch {}
+      $('#go', s).onclick = async (e) => {
+        e.target.disabled = true;
+        const b = { c: cParam || info.id, kind, name: $('#n', s).value, phone: $('#p', s).value, address: $('#a', s)?.value, pickup_time: $('#t', s).value, note: $('#nt', s).value, lines: cart.map((x) => ({ product_id: x.product_id, qty: x.qty, options: x.options, note: x.note })) };
+        try { localStorage.setItem('tk:guest', JSON.stringify({ n: b.name, p: b.phone, a: b.address })); } catch {}
+        try { const r = await api('/api/public/resto/online-order', b); cart = []; location.href = `/o/${r.token}`; } catch (err) { toast(err.message); e.target.disabled = false; }
+      };
+    });
+  });
+}
+
+let resDate = new Date(Date.now() + 3600e3).toISOString().slice(0, 10), resCovers = 2, resTime = '', slots = null, booked = null;
+async function loadSlots() { slots = null; render(); try { slots = (await api(`/api/public/resto/slots?date=${resDate}&covers=${resCovers}${cParam ? `&c=${cParam}` : ''}`)).slots; } catch (e) { slots = []; toast(e.message); } render(); }
+function renderReserve() {
+  if (booked) {
+    app.innerHTML = `${hero(L('C\'est réservé !', 'You\'re booked!'), `${esc(booked.name)} · ${booked.covers} ${L('pers.', 'guests')}`)}<div class="wrap"><div class="card" style="text-align:center"><div style="font-size:52px">🥂</div>
+      <h2>${new Date(booked.date + 'T12:00:00Z').toLocaleDateString(lang === 'en' ? 'en-GB' : 'fr-FR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' })} · ${esc(booked.time)}</h2>
+      <p class="muted">${L('Référence', 'Reference')} <b>${esc(booked.number)}</b>. ${L('Nous vous attendons. En cas d\'empêchement, prévenez-nous.', 'We look forward to seeing you. Let us know if plans change.')}</p>${info.phone ? `<a class="btn block" href="tel:${esc(info.phone)}">📞 ${esc(info.phone)}</a>` : ''}</div></div>`;
+    bindLang(); return;
+  }
+  if (!info.online_reservations) { app.innerHTML = `${hero(L('Réservation', 'Booking'), L('Appelez-nous pour réserver.', 'Call us to book.'))}<div class="wrap"><div class="card">${info.phone ? `<a class="btn primary block" href="tel:${esc(info.phone)}">📞 ${esc(info.phone)}</a>` : ''}</div></div>`; bindLang(); return; }
+  const days = Array.from({ length: 14 }, (_, i) => new Date(Date.now() + 3600e3 + i * 864e5).toISOString().slice(0, 10));
+  app.innerHTML = `${hero(L('Réserver une table', 'Book a table'), `${esc(info.cuisine || '')}${info.address ? ` · ${esc(info.address)}` : ''}`)}
+  <div class="wrap"><div class="card"><h2>${L('Quand ?', 'When?')}</h2>
+    <div class="cats" style="position:static;padding-top:0">${days.map((d) => { const x = new Date(d + 'T12:00:00Z'); return `<button data-d="${d}" class="${d === resDate ? 'on' : ''}" style="display:flex;flex-direction:column;align-items:center;line-height:1.2;border-radius:14px"><small>${x.toLocaleDateString(lang === 'en' ? 'en-GB' : 'fr-FR', { weekday: 'short', timeZone: 'UTC' })}</small><b style="font-size:18px">${x.getUTCDate()}</b></button>`; }).join('')}</div>
+    <h2 style="margin-top:12px">${L('Combien ?', 'How many?')}</h2><div class="cats" style="position:static;padding-top:0">${[1, 2, 3, 4, 5, 6, 8, 10, 12].map((n) => `<button data-n="${n}" class="${n === resCovers ? 'on' : ''}">${n}</button>`).join('')}</div>
+    <h2 style="margin-top:12px">${L('À quelle heure ?', 'What time?')}</h2>${slots === null ? '<div class="skel" style="height:90px"></div>' : slots.length ? `<div class="slots">${slots.map((s) => `<button data-t="${s.time}" ${s.free ? '' : 'disabled'} class="${s.time === resTime ? 'on' : ''}">${s.time}</button>`).join('')}</div>` : `<p class="muted">${L('Plus de créneau ce jour-là.', 'No more slots that day.')}</p>`}</div>
+    ${resTime ? `<div class="card"><h2>${L('Vos coordonnées', 'Your details')}</h2><label class="f">${L('Nom', 'Name')}<input class="in" id="n" autocomplete="name"></label><label class="f">${L('Téléphone (WhatsApp)', 'Phone (WhatsApp)')}<input class="in" id="p" type="tel" autocomplete="tel"></label><label class="f">E-mail<input class="in" id="e" type="email" autocomplete="email"></label>
+      <label class="f">${L('Une occasion particulière ?', 'A special occasion?')}<select class="in" id="o"><option value="">—</option>${[L('Anniversaire', 'Birthday'), L('Repas d\'affaires', 'Business dinner'), L('Rendez-vous galant', 'Date night'), L('Demande en mariage', 'Proposal'), L('Famille', 'Family')].map((x) => `<option>${esc(x)}</option>`).join('')}</select></label>
+      <label class="f">${L('Allergies, préférences…', 'Allergies, preferences…')}<input class="in" id="nt"></label><button class="btn primary block" id="go" style="margin-top:14px">${L('Confirmer pour', 'Confirm for')} ${resCovers} · ${esc(resTime)}</button></div>` : ''}
+    <div class="foot">${esc(info.name)}<br>${L('Propulsé par', 'Powered by')} Teknons Resto</div></div>`;
+  bindLang();
+  document.querySelectorAll('[data-d]').forEach((b) => b.onclick = () => { resDate = b.dataset.d; resTime = ''; loadSlots(); });
+  document.querySelectorAll('[data-n]').forEach((b) => b.onclick = () => { resCovers = Number(b.dataset.n); resTime = ''; loadSlots(); });
+  document.querySelectorAll('[data-t]').forEach((b) => b.onclick = () => { resTime = b.dataset.t; render(); $('#n')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+  $('#go')?.addEventListener('click', async (e) => {
+    e.target.disabled = true;
+    try { booked = await api('/api/public/resto/reserve', { c: cParam || info.id, date: resDate, time: resTime, covers: resCovers, name: $('#n').value, phone: $('#p').value, email: $('#e').value, occasion: $('#o').value, note: $('#nt').value }); render(); window.scrollTo(0, 0); }
+    catch (err) { toast(err.message); e.target.disabled = false; }
+  });
+}
+
+function schedulePoll(fn) { clearTimeout(pollT); pollT = setTimeout(() => fn().catch(() => {}), 8000); }
+function render() {
+  document.documentElement.lang = lang;
+  if (info?.name) document.title = `${info.name}${mode === 'table' ? ` · ${L('Table', 'Table')} ${info.table.label}` : mode === 'reserve' ? ` · ${L('Réservation', 'Booking')}` : ''}`;
+  ({ table: renderTable, track: renderTrack, order: renderOrder, reserve: renderReserve })[mode]();
+}
+(async () => {
+  try {
+    if (mode === 'table') { const r = await api(`/api/public/resto/table/${encodeURIComponent(token)}`); check = r.check; info = r; }
+    else if (mode === 'track') { const r = await api(`/api/public/resto/check/${encodeURIComponent(token)}`); check = r.check; info = r; }
+    else { info = await api(`/api/public/resto${cParam ? `?c=${encodeURIComponent(cParam)}` : ''}`); }
+    render();
+    if (mode === 'reserve') loadSlots();
+  } catch (e) { app.innerHTML = `${hero(L('Oups', 'Oops'), esc(e.message))}<div class="wrap"><div class="card"><p>${esc(e.message)}</p></div></div>`; bindLang(); }
+})();
+</script>
+</body>
+</html>

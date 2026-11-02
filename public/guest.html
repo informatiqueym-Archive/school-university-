@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0C2D3E">
+<meta name="robots" content="noindex">
+<title>Votre séjour</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--navy:#0C2D3E;--navy2:#123B50;--teal:#0E8F9B;--teal-l:#E3F4F5;--gold:#C9A227;--bg:#F5F3EE;--ink:#13232C;--muted:#5F6B72;--line:#E4E0D6;--ok:#14915F;--bad:#C93636;--r:16px}
+*{box-sizing:border-box}html,body{margin:0}
+body{font:15px/1.5 "Hanken Grotesk",system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;padding-bottom:84px}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--teal)}
+.hero{background:radial-gradient(120% 140% at 100% 0,#1A4F66 0,var(--navy) 55%);color:#fff;padding:22px 20px 56px;position:relative}
+.hero .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.hero h1{font:600 30px/1.1 "Cormorant Garamond",serif;margin:14px 0 4px;letter-spacing:.01em}
+.stars{color:var(--gold);letter-spacing:3px;font-size:13px}
+.hero .sub{color:#B9D3DC;font-size:14px}
+.lang{background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:99px;padding:6px 12px;font-weight:700;cursor:pointer}
+.wrap{max-width:640px;margin:-38px auto 0;padding:0 14px;position:relative}
+.card{background:#fff;border-radius:var(--r);padding:18px;box-shadow:0 6px 24px rgba(12,45,62,.08);margin-bottom:14px}
+.card h2{font:600 22px/1.2 "Cormorant Garamond",serif;margin:0 0 10px;color:var(--navy)}
+.card h3{font-size:15px;margin:16px 0 8px}
+.row{display:flex;align-items:center;gap:10px}.between{justify-content:space-between}
+.muted{color:var(--muted)}.sm{font-size:13px}
+.lrow{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.lrow:last-child{border-bottom:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#2a1f00}
+.btn.block{width:100%}
+.btn:disabled{opacity:.55}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{border:1.5px solid var(--line);border-radius:14px;padding:14px;background:#fff;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-height:84px}
+.tile b{font-size:15px}.tile:hover{border-color:var(--teal)}
+.tile .ic{font-size:22px}
+.on-dnd{background:#FCEBEB;border-color:var(--bad)}
+.wifi{background:var(--teal-l);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.wifi code{font:700 16px ui-monospace,Menlo,monospace;color:var(--navy)}
+.cats{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:6px}
+.cats button{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:7px 14px;font-weight:700;white-space:nowrap;cursor:pointer;color:var(--muted)}
+.cats button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.item{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.item p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-weight:800;cursor:pointer}
+.qty button.add{background:var(--teal);border-color:var(--teal);color:#fff}
+.price{font-weight:800;color:var(--navy);white-space:nowrap}
+.cartbar{position:fixed;left:0;right:0;bottom:72px;padding:0 14px;z-index:5}
+.cartbar .btn{max-width:612px;margin:0 auto;display:flex;width:100%;justify-content:space-between;box-shadow:0 8px 24px rgba(12,45,62,.25)}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:6}
+nav.tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;padding:4px 0}
+nav.tabs button span{font-size:20px;line-height:1}
+nav.tabs button.on{color:var(--teal)}
+label.f{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:10px 0 0}
+label.f input,label.f select,label.f textarea{display:block;width:100%;margin-top:4px;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;font-size:15px;color:var(--ink)}
+textarea{min-height:80px;resize:vertical}
+.pill{display:inline-block;border-radius:99px;padding:2px 9px;font-size:12px;font-weight:700;background:#EEF0F1;color:var(--muted)}
+.pill.ok{background:#E5F6EE;color:var(--ok)}.pill.warn{background:#FFF4DE;color:#A66300}.pill.info{background:var(--teal-l);color:#0A6A73}
+.big{font-size:26px;font-weight:800;color:var(--navy)}
+.starsel{display:flex;gap:6px;font-size:32px}
+.starsel button{background:none;border:0;cursor:pointer;color:#D6D1C4;padding:0}
+.starsel button.on{color:var(--gold)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:150px;background:var(--navy);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600;z-index:20;max-width:90vw;text-align:center}
+.toast.err{background:var(--bad)}
+.empty{text-align:center;padding:30px 10px;color:var(--muted)}
+.prov{display:flex;gap:8px;margin-top:8px}
+.prov label{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-weight:700;cursor:pointer}
+.prov input{display:none}.prov input:checked+span{color:var(--teal)}
+.prov label:has(input:checked){border-color:var(--teal);background:var(--teal-l)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 20px}
+</style>
+</head>
+<body>
+<div id="app"><div class="hero"><h1>…</h1></div></div>
+<script>
+'use strict';
+const token = location.pathname.split('/').pop();
+let lang = (() => { try { return localStorage.getItem('tk:glang') || (navigator.language || 'fr').slice(0, 2); } catch { return 'fr'; } })();
+if (!['fr', 'en'].includes(lang)) lang = 'en';
+const L = (fr, en) => (lang === 'en' ? en : fr);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const money = (n) => `${Math.round(n || 0).toLocaleString('fr-FR').replace(/ | /g, ' ')} FCFA`;
+const dt = (d) => (d ? new Date(d.slice(0, 10) + 'T12:00:00Z').toLocaleDateString(lang === 'en' ? 'en-GB' : 'fr-FR', { weekday: 'short', day: 'numeric', month: 'long', timeZone: 'UTC' }) : '');
+const $ = (s) => document.querySelector(s);
+let data = null, tab = 'home', cart = [], cat = null;
+const KIND_EN = { towels: 'Towels / linen', cleaning: 'Room cleaning', amenities: 'Toiletries', wakeup: 'Wake-up call', taxi: 'Taxi / driver', airport: 'Airport transfer', late_checkout: 'Late check-out', maintenance: 'Something is broken', iron: 'Iron', baby_cot: 'Baby cot', restaurant: 'Restaurant booking', concierge: 'Concierge', other: 'Other' };
+const KIND_IC = { towels: '🧺', cleaning: '🧹', amenities: '🧴', wakeup: '⏰', taxi: '🚕', airport: '✈️', late_checkout: '🕐', maintenance: '🔧', iron: '👔', baby_cot: '👶', restaurant: '🍽️', concierge: '🛎️', other: '💬' };
+const ST = { new: ['warn', 'Reçue', 'Received'], preparing: ['info', 'En préparation', 'Being prepared'], ready: ['info', 'En route', 'On its way'], delivered: ['ok', 'Livrée', 'Delivered'], settled: ['ok', 'Livrée', 'Delivered'], cancelled: ['', 'Annulée', 'Cancelled'],
+  open: ['warn', 'Reçue', 'Received'], in_progress: ['info', 'En cours', 'In progress'], done: ['ok', 'Fait', 'Done'], refused: ['', 'Impossible', 'Declined'], requested: ['warn', 'Demandé', 'Requested'], booked: ['ok', 'Confirmé', 'Confirmed'], no_show: ['', 'Manqué', 'Missed'] };
+const pill = (s) => { const x = ST[s] || ['', s, s]; return `<span class="pill ${x[0]}">${L(x[1], x[2])}</span>`; };
+function toast(m, err) { const t = document.createElement('div'); t.className = 'toast' + (err ? ' err' : ''); t.textContent = m; document.body.append(t); setTimeout(() => t.remove(), 3500); }
+async function api(path, body) {
+  const r = await fetch(`/api/portal/${encodeURIComponent(token)}${path}`, body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {});
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error?.message || j.message || L('Une erreur est survenue', 'Something went wrong'));
+  return j;
+}
+async function load() {
+  try { data = await api(''); } catch (e) { document.getElementById('app').innerHTML = `<div class="hero"><h1>${L('Lien indisponible', 'Link unavailable')}</h1><p class="sub">${esc(e.message)}</p></div>`; return; }
+  document.title = data.hotel.name;
+  render();
+}
+const inHouse = () => data.stay?.status === 'in_house';
+function render() {
+  const h = data.hotel, s = data.stay;
+  const tabs = [['home', '🏠', L('Accueil', 'Home')], ['dine', '🍽️', L('Commander', 'Order')], ['spa', '🌿', 'Spa'], ['ask', '🛎️', L('Demandes', 'Requests')], ['bill', '🧾', L('Ma note', 'My bill')]];
+  document.getElementById('app').innerHTML = `
+  <div class="hero"><div class="top"><span class="stars">${'★'.repeat(h.stars || 0)}</span><button class="lang" id="lang">${lang === 'fr' ? 'EN' : 'FR'}</button></div>
+    <h1>${esc(h.name)}</h1><div class="sub">${s ? `${L('Bienvenue', 'Welcome')}, ${esc(s.guest)}${data.room ? ` · ${L('chambre', 'room')} ${esc(data.room)}` : ''}` : data.room ? `${L('Chambre', 'Room')} ${esc(data.room)}` : ''}</div></div>
+  <div class="wrap" id="main"></div>
+  ${s ? `<nav class="tabs">${tabs.map(([k, ic, l]) => `<button data-tab="${k}" class="${k === tab ? 'on' : ''}"><span>${ic}</span>${l}</button>`).join('')}</nav>` : ''}
+  <div id="cartbar"></div>`;
+  $('#lang').onclick = () => { lang = lang === 'fr' ? 'en' : 'fr'; try { localStorage.setItem('tk:glang', lang); } catch {} render(); };
+  document.querySelectorAll('[data-tab]').forEach((b) => b.onclick = () => { tab = b.dataset.tab; render(); window.scrollTo(0, 0); });
+  const main = $('#main');
+  if (!s) { main.innerHTML = `<div class="card"><h2>${L('Bienvenue', 'Welcome')}</h2><p>${esc(h.welcome || '')}</p><p class="muted">${L('Cette chambre n\'a pas de client enregistré pour le moment. Adressez-vous à la réception.', 'No guest is registered in this room yet. Please ask the front desk.')}</p>${h.phone ? `<a class="btn primary block" href="tel:${esc(h.phone)}">${L('Appeler la réception', 'Call the front desk')}</a>` : ''}</div>`; return; }
+  ({ home, dine, spa, ask, bill })[tab](main);
+  drawCart();
+}
+function home(main) {
+  const s = data.stay, h = data.hotel;
+  const pre = ['tentative', 'confirmed'].includes(s.status);
+  main.innerHTML = `
+  <div class="card"><div class="row between"><h2 style="margin:0">${L('Votre séjour', 'Your stay')}</h2>${pill(s.status === 'in_house' ? 'booked' : s.status === 'checked_out' ? 'done' : 'requested').replace(/Confirmé|Confirmed/, L('En chambre', 'In house')).replace(/Fait|Done/, L('Terminé', 'Completed')).replace(/Demandé|Requested/, s.status === 'confirmed' ? L('Confirmé', 'Confirmed') : L('En attente d\'acompte', 'Awaiting deposit'))}</div>
+    <div class="lrow"><span class="muted">${L('Arrivée', 'Arrival')}</span><b>${dt(s.arrival)} · ${esc(h.checkin_time)}</b></div>
+    <div class="lrow"><span class="muted">${L('Départ', 'Departure')}</span><b>${dt(s.departure)} · ${esc(s.late_checkout || h.checkout_time)}</b></div>
+    <div class="lrow"><span class="muted">${L('Chambre', 'Room')}</span><b>${esc(s.type)}${data.room ? ` · ${esc(data.room)}` : ''}</b></div>
+    <div class="lrow"><span class="muted">${L('Réservation', 'Booking')}</span><b>${esc(s.number)}</b></div>
+    ${pre && s.balance > 0 ? `<button class="btn gold block" style="margin-top:12px" data-go="bill">${L('Payer mon acompte par Mobile Money', 'Pay my deposit by Mobile Money')}</button>` : ''}</div>
+  ${h.welcome ? `<div class="card"><p style="margin:0;font-style:italic;font:500 19px/1.4 'Cormorant Garamond',serif">${esc(h.welcome)}</p></div>` : ''}
+  ${data.wifi?.name ? `<div class="card"><h2>Wi-Fi</h2><div class="wifi"><div><div class="sm muted">${L('Réseau', 'Network')}</div><code>${esc(data.wifi.name)}</code></div><div><div class="sm muted">${L('Mot de passe', 'Password')}</div><code id="wp">${esc(data.wifi.password)}</code></div><button class="btn" id="cp">${L('Copier', 'Copy')}</button></div></div>` : ''}
+  ${inHouse() ? `<div class="card"><h2>${L('En un geste', 'In one tap')}</h2><div class="grid2">
+    <button class="tile ${s.dnd ? 'on-dnd' : ''}" id="dnd"><span class="ic">🚫</span><b>${s.dnd ? L('« Ne pas déranger » activé', 'Do not disturb is ON') : L('Ne pas déranger', 'Do not disturb')}</b><span class="sm muted">${s.dnd ? L('Touchez pour lever', 'Tap to turn off') : L('Le ménage attendra', 'Housekeeping will wait')}</span></button>
+    <button class="tile" data-go="dine"><span class="ic">🍽️</span><b>${L('Room service', 'Room service')}</b><span class="sm muted">${L('Servi en chambre', 'Served to your room')}</span></button>
+    <button class="tile" data-quick="towels"><span class="ic">🧺</span><b>${L('Serviettes', 'Towels')}</b><span class="sm muted">${L('Linge propre', 'Fresh linen')}</span></button>
+    <button class="tile" data-quick="cleaning"><span class="ic">🧹</span><b>${L('Ménage', 'Clean my room')}</b><span class="sm muted">${L('Dès que possible', 'As soon as possible')}</span></button>
+    <button class="tile" data-quick="taxi"><span class="ic">🚕</span><b>${L('Taxi / chauffeur', 'Taxi / driver')}</b><span class="sm muted">${L('La conciergerie s\'en occupe', 'Concierge handles it')}</span></button>
+    <button class="tile" id="late"><span class="ic">🕐</span><b>${L('Départ tardif', 'Late check-out')}</b><span class="sm muted">${s.late_checkout ? `${L('Accordé', 'Granted')} ${esc(s.late_checkout)}` : L('Selon disponibilité', 'Subject to availability')}</span></button></div></div>` : ''}
+  ${['in_house', 'checked_out'].includes(s.status) && !data.feedback ? feedbackCard() : data.feedback ? `<div class="card"><p class="muted" style="margin:0">${L('Merci pour votre avis !', 'Thank you for your review!')}</p></div>` : ''}
+  <div class="card"><h2>${L('Contact', 'Contact')}</h2>${h.address ? `<div class="lrow"><span class="muted">${L('Adresse', 'Address')}</span><b>${esc(h.address)}${h.city ? ', ' + esc(h.city) : ''}</b></div>` : ''}
+    ${h.phone ? `<div class="row" style="margin-top:10px"><a class="btn primary" style="flex:1" href="tel:${esc(h.phone)}">${L('Appeler', 'Call')}</a><a class="btn" style="flex:1" target="_blank" rel="noopener" href="https://wa.me/${esc(String(h.phone).replace(/\D/g, '').replace(/^(6\d{8})$/, '237$1'))}">WhatsApp</a></div>` : ''}</div>
+  <footer>Teknons Hôtel</footer>`;
+  main.querySelectorAll('[data-go]').forEach((b) => b.onclick = () => { tab = b.dataset.go; render(); });
+  $('#cp')?.addEventListener('click', () => { navigator.clipboard?.writeText(data.wifi.password); toast(L('Mot de passe copié', 'Password copied')); });
+  $('#dnd')?.addEventListener('click', () => api('/dnd', { dnd: !data.stay.dnd }).then((r) => { data.stay.dnd = r.dnd; render(); }).catch((e) => toast(e.message, 1)));
+  main.querySelectorAll('[data-quick]').forEach((b) => b.onclick = () => api('/request', { kind: b.dataset.quick }).then(() => toast(L('Demande envoyée à la réception', 'Request sent to the front desk'))).catch((e) => toast(e.message, 1)));
+  $('#late')?.addEventListener('click', () => {
+    const t = prompt(`${L('À quelle heure souhaitez-vous partir ?', 'What time would you like to leave?')} (${L('supplément possible', 'fee may apply')} : ${money(data.late_checkout_fee)})`, '15:00');
+    if (t && /^\d{1,2}:\d{2}$/.test(t.trim())) api('/late-checkout', { time: t.trim().padStart(5, '0') }).then(() => toast(L('Demande envoyée, la réception vous confirme', 'Request sent, the front desk will confirm'))).catch((e) => toast(e.message, 1));
+  });
+  bindFeedback(main);
+}
+function feedbackCard() {
+  const row = (k, l) => `<div class="lrow" style="align-items:center"><span>${l}</span><div class="starsel sm" data-k="${k}" style="font-size:22px">${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-n="${n}">★</button>`).join('')}</div></div>`;
+  return `<div class="card" id="fb"><h2>${L('Votre avis compte', 'Your opinion matters')}</h2><p class="muted sm" style="margin-top:0">${L('Notez votre séjour : la direction lit chaque avis.', 'Rate your stay: management reads every review.')}</p>
+    <div class="starsel" data-k="rating" style="justify-content:center;margin:8px 0">${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-n="${n}">★</button>`).join('')}</div>
+    ${row('cleanliness', L('Propreté', 'Cleanliness'))}${row('service', L('Service', 'Service'))}${row('food', L('Restauration', 'Food'))}
+    <label class="f">${L('Un mot pour nous ?', 'Anything to tell us?')}<textarea id="fbc"></textarea></label><button class="btn primary block" style="margin-top:12px" id="fbs">${L('Envoyer mon avis', 'Send my review')}</button></div>`;
+}
+function bindFeedback(main) {
+  const v = {};
+  main.querySelectorAll('.starsel').forEach((g) => g.querySelectorAll('button').forEach((b) => b.onclick = () => { v[g.dataset.k] = Number(b.dataset.n); g.querySelectorAll('button').forEach((x) => x.classList.toggle('on', Number(x.dataset.n) <= v[g.dataset.k])); }));
+  $('#fbs')?.addEventListener('click', () => api('/feedback', { ...v, comment: $('#fbc').value }).then(() => { data.feedback = true; toast(L('Merci !', 'Thank you!')); render(); }).catch((e) => toast(e.message, 1)));
+}
+function dine(main) {
+  const items = data.menu.filter((i) => !i.duration);
+  if (!inHouse() || !items.length) { main.innerHTML = `<div class="card empty">${L('Le room service est disponible pendant votre séjour.', 'Room service is available during your stay.')}</div>`; return; }
+  const groups = [...new Set(items.map((i) => `${i.outlet} · ${i.category || ''}`.replace(/ · $/, '')))];
+  if (!groups.includes(cat)) cat = groups[0];
+  main.innerHTML = `<div class="card"><h2>${L('Room service et bar', 'Room service & bar')}</h2><div class="cats">${groups.map((g) => `<button data-c="${esc(g)}" class="${g === cat ? 'on' : ''}">${esc(g)}</button>`).join('')}</div>
+    ${items.filter((i) => `${i.outlet} · ${i.category || ''}`.replace(/ · $/, '') === cat).map((i) => { const q = cart.find((c) => c.id === i.id)?.qty || 0; return `<div class="item"><div><b>${esc(i.name)}</b>${i.description ? `<p>${esc(i.description)}</p>` : ''}<div class="price" style="margin-top:4px">${money(i.price)}</div></div><div class="qty">${q ? `<button data-m="${i.id}">−</button><b>${q}</b>` : ''}<button class="add" data-p="${i.id}">+</button></div></div>`; }).join('')}</div>
+  ${data.orders.length ? `<div class="card"><h2>${L('Mes commandes', 'My orders')}</h2>${data.orders.map((o) => `<div class="lrow"><span>${esc(o.outlet)} <span class="muted sm">${esc(o.created_at.slice(11, 16))}</span></span><span>${pill(o.status)} <b>${money(o.total)}</b></span></div>`).join('')}</div>` : ''}`;
+  main.querySelectorAll('[data-c]').forEach((b) => b.onclick = () => { cat = b.dataset.c; render(); });
+  main.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => { const i = data.menu.find((x) => x.id === Number(b.dataset.p)); const c = cart.find((x) => x.id === i.id); if (c) c.qty++; else cart.push({ id: i.id, name: i.name, price: i.price, qty: 1 }); render(); });
+  main.querySelectorAll('[data-m]').forEach((b) => b.onclick = () => { const c = cart.find((x) => x.id === Number(b.dataset.m)); c.qty--; cart = cart.filter((x) => x.qty > 0); render(); });
+}
+function drawCart() {
+  const n = cart.reduce((t, c) => t + c.qty, 0);
+  $('#cartbar').innerHTML = n && tab === 'dine' ? `<div class="cartbar"><button class="btn primary" id="order"><span>${n} ${L('article(s)', 'item(s)')} · ${L('Commander', 'Order')}</span><span>${money(cart.reduce((t, c) => t + c.qty * c.price, 0))}</span></button></div>` : '';
+  $('#order')?.addEventListener('click', () => {
+    const note = prompt(L('Une précision pour la cuisine ? (allergie, cuisson…)', 'Anything for the kitchen? (allergy, cooking…)'), '') ?? null;
+    if (note === null) return;
+    api('/order', { lines: cart.map((c) => ({ product_id: c.id, qty: c.qty })), note }).then(() => { cart = []; toast(L('Commande envoyée ! Elle sera ajoutée à votre note.', 'Order sent! It will be added to your bill.')); return load(); }).catch((e) => toast(e.message, 1));
+  });
+}
+function spa(main) {
+  const items = data.menu.filter((i) => i.duration > 0);
+  if (!inHouse() || !items.length) { main.innerHTML = `<div class="card empty">${L('Les soins se réservent pendant votre séjour.', 'Treatments can be booked during your stay.')}</div>`; return; }
+  const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+  main.innerHTML = `<div class="card"><h2>${L('Spa et bien-être', 'Spa & wellness')}</h2>
+    ${items.map((i) => `<label class="item" style="cursor:pointer"><div><b>${esc(i.name)}</b>${i.description ? `<p>${esc(i.description)}</p>` : ''}<div class="sm muted">${i.duration} min</div></div><div style="text-align:right"><div class="price">${money(i.price)}</div><input type="radio" name="svc" value="${i.id}" style="width:20px;height:20px;margin-top:8px"></div></label>`).join('')}
+    <div class="grid2"><label class="f">${L('Date', 'Date')}<input type="date" id="sd" value="${tomorrow}"></label><label class="f">${L('Heure', 'Time')}<input type="time" id="st" value="10:00" step="900"></label></div>
+    <label class="f">${L('Note (préférences, pression…)', 'Note (preferences, pressure…)')}<input id="sn"></label>
+    <button class="btn primary block" style="margin-top:12px" id="book">${L('Réserver ce soin', 'Book this treatment')}</button><p class="sm muted">${L('Le spa vous confirme l\'heure. Le soin est ajouté à votre note.', 'The spa confirms the time. The treatment is added to your bill.')}</p></div>
+  ${data.spa.length ? `<div class="card"><h2>${L('Mes rendez-vous', 'My appointments')}</h2>${data.spa.map((a) => `<div class="lrow"><span>${esc(a.name)}<div class="sm muted">${dt(a.start_at)} · ${esc(a.start_at.slice(11, 16))}</div></span>${pill(a.status)}</div>`).join('')}</div>` : ''}`;
+  $('#book').onclick = () => {
+    const id = main.querySelector('[name=svc]:checked')?.value;
+    if (!id) return toast(L('Choisissez un soin', 'Choose a treatment'), 1);
+    api('/spa', { product_id: Number(id), start_at: `${$('#sd').value}T${$('#st').value}`, note: $('#sn').value }).then(() => { toast(L('Demande envoyée au spa', 'Request sent to the spa')); return load(); }).catch((e) => toast(e.message, 1));
+  };
+}
+function ask(main) {
+  if (!inHouse()) { main.innerHTML = `<div class="card empty">${L('Les demandes sont possibles pendant votre séjour. Pour toute question avant votre arrivée, appelez-nous.', 'Requests are available during your stay. Before arrival, please call us.')}</div>`; return; }
+  const kinds = Object.keys(data.request_kinds).filter((k) => k !== 'late_checkout');
+  main.innerHTML = `<div class="card"><h2>${L('Conciergerie', 'Concierge')}</h2><p class="muted sm" style="margin-top:0">${L('Demandez ce que vous voulez : nous nous en occupons.', 'Ask for anything: we take care of it.')}</p>
+    <div class="grid2">${kinds.map((k) => `<button class="tile" data-k="${k}"><span class="ic">${KIND_IC[k] || '💬'}</span><b>${esc(lang === 'en' ? KIND_EN[k] || k : data.request_kinds[k])}</b></button>`).join('')}</div>
+    <div id="form"></div></div>
+  ${data.requests.length ? `<div class="card"><h2>${L('Mes demandes', 'My requests')}</h2>${data.requests.map((q) => `<div class="lrow"><span>${esc(lang === 'en' ? KIND_EN[q.kind] || q.kind : data.request_kinds[q.kind] || q.kind)}<div class="sm muted">${esc(q.detail || '')}</div></span>${pill(q.status)}</div>`).join('')}</div>` : ''}`;
+  main.querySelectorAll('[data-k]').forEach((b) => b.onclick = () => {
+    const k = b.dataset.k;
+    $('#form').innerHTML = `<h3>${KIND_IC[k] || ''} ${esc(lang === 'en' ? KIND_EN[k] : data.request_kinds[k])}</h3><label class="f">${L('Précisions', 'Details')}<textarea id="qd" placeholder="${k === 'airport' || k === 'taxi' ? L('Heure, destination, nombre de bagages', 'Time, destination, number of bags') : k === 'wakeup' ? L('Heure du réveil', 'Wake-up time') : ''}"></textarea></label>
+      <label class="f">${L('Pour quand ? (optionnel)', 'When? (optional)')}<input type="datetime-local" id="qt"></label><button class="btn primary block" style="margin-top:12px" id="qs">${L('Envoyer', 'Send')}</button>`;
+    $('#qs').onclick = () => api('/request', { kind: k, detail: $('#qd').value, due_at: $('#qt').value }).then(() => { toast(L('Demande envoyée', 'Request sent')); return load(); }).catch((e) => toast(e.message, 1));
+    $('#qd').focus();
+  });
+}
+function bill(main) {
+  const s = data.stay;
+  const pre = ['tentative', 'confirmed'].includes(s.status);
+  const canPay = ['tentative', 'confirmed', 'in_house'].includes(s.status) && (pre || s.balance > 0) && Object.values(data.hotel.momo).some(Boolean);
+  main.innerHTML = `<div class="card"><h2>${L('Ma note', 'My bill')}</h2>
+    ${data.lines.map((l) => `<div class="lrow"><span>${esc(l.description)}<div class="sm muted">${dt(l.date)}</div></span><b style="white-space:nowrap">${money(l.amount)}</b></div>`).join('') || `<p class="muted">${pre ? L('Votre note s\'ouvre à votre arrivée.', 'Your bill opens on arrival.') : L('Aucune prestation pour le moment.', 'Nothing yet.')}</p>`}
+    <div class="lrow"><span>${L('Total', 'Total')}</span><b>${money(s.charges)}</b></div>
+    <div class="lrow"><span>${L('Déjà réglé', 'Paid')}</span><b style="color:var(--ok)">${money(s.paid)}</b></div>
+    <div class="lrow" style="border:0"><span><b>${s.balance >= 0 ? L('Reste à payer', 'Balance') : L('Votre avance', 'Your credit')}</b></span><span class="big">${money(Math.abs(s.balance))}</span></div></div>
+  ${canPay ? `<div class="card"><h2>${L('Payer par Mobile Money', 'Pay by Mobile Money')}</h2><p class="muted sm" style="margin-top:0">${pre ? L('Réglez votre acompte (ou tout le séjour) pour garantir votre chambre.', 'Pay your deposit (or the whole stay) to guarantee your room.') : L('Réglez votre note maintenant et partez sans attendre à la réception.', 'Settle now and leave without waiting at the desk.')}</p>
+    <div class="prov">${data.hotel.momo.mtn_momo ? '<label><input type="radio" name="prov" value="mtn_momo" checked><span>MTN MoMo</span></label>' : ''}${data.hotel.momo.orange_money ? `<label><input type="radio" name="prov" value="orange_money" ${data.hotel.momo.mtn_momo ? '' : 'checked'}><span>Orange Money</span></label>` : ''}</div>
+    <label class="f">${L('Numéro de téléphone', 'Phone number')}<input id="pp" type="tel" inputmode="tel" placeholder="6XX XX XX XX"></label>
+    ${pre ? `<label class="row sm" style="margin-top:10px"><input type="checkbox" id="full"> ${L('Payer tout le séjour', 'Pay the whole stay')}</label>` : ''}
+    <button class="btn gold block" style="margin-top:12px" id="pay">${L('Payer', 'Pay')}</button><div id="pst" class="sm" style="margin-top:10px"></div></div>` : ''}`;
+  $('#pay')?.addEventListener('click', async () => {
+    const b = $('#pay'); b.disabled = true;
+    try {
+      const p = await api('/pay', { provider: main.querySelector('[name=prov]:checked')?.value, phone: $('#pp').value, full: $('#full')?.checked });
+      $('#pst').innerHTML = `${L('Validez le paiement de', 'Approve the payment of')} <b>${money(p.amount)}</b> ${L('sur votre téléphone (code secret Mobile Money)…', 'on your phone (Mobile Money PIN)…')}`;
+      for (let i = 0; i < 40; i++) {
+        await new Promise((r) => setTimeout(r, 3000));
+        const st = await api(`/pay/${p.id}`);
+        if (st.status === 'successful') { toast(L('Paiement reçu, merci !', 'Payment received, thank you!')); return load(); }
+        if (st.status === 'failed') { $('#pst').innerHTML = `<b style="color:var(--bad)">${L('Paiement refusé', 'Payment declined')}</b> ${esc(st.reason || '')}`; b.disabled = false; return; }
+      }
+      $('#pst').textContent = L('Toujours en attente. La réception verra le paiement dès sa validation.', 'Still pending. The desk will see it once approved.');
+    } catch (e) { toast(e.message, 1); b.disabled = false; }
+  });
+}
+load();
+setInterval(() => { if (tab !== 'dine' && !document.querySelector('textarea:focus,input:focus') && data?.stay) api('').then((d) => { data = d; render(); }).catch(() => {}); }, 60000);
+</script>
+</body>
+</html>
